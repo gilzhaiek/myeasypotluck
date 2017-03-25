@@ -1,0 +1,397 @@
+﻿body 
+{
+    padding:0;
+    margin:0;
+    font-family:Arial;
+    background:#ffffff url('../Images/global/bg1px.png') repeat-x;
+}
+#dvCopyRight  
+{  
+    margin: -40px 240px 0 0;
+    color:#151515;
+    text-align:center;
+}
+#dvLoginCopyRight  
+{  
+    position:absolute;
+    top:720px;
+    left:100px;    
+    color:#151515;
+    text-align:center;
+}
+#frm-login
+{
+    background:url('../Images/login/main-bg.jpg') no-repeat;
+    width:948px;
+    height:768px;
+}
+#frm-login .login-box
+{
+    position:absolute;
+    top:550px;
+    left:314px;
+}
+#frm-login .txt-bg-long
+{
+    background:url('../Images/login/txt-bg-long.png') no-repeat;
+    width:275px;
+    height:38px;
+    padding:12px 6px 6px 0;
+}
+#frm-login .txt-bg
+{
+    background:url('../Images/login/txt-bg.png') no-repeat;
+    width:183px;
+    height:38px;
+    padding:12px 6px 6px 0;
+}
+#about-txt
+{
+    text-align:left;
+    padding:10px 0 0 80px;
+}
+#login-txt
+{
+    position:absolute;
+    top:170px;
+    left:80px;
+    text-align:left;
+    font-weight:bolder;
+}
+#frm-login .text-control
+{
+    height:18px;
+    font-weight:bolder;
+    background-color: White;
+}
+#frm-signup
+{
+    background:url('../Images/signup/signup_web.jpg') no-repeat;
+    width:948px;
+    height:768px;
+}
+#frm-signup .signup-container
+{
+    margin:176px 0 0 315px;
+}
+#frm-signup .signup-spacer
+{
+    padding-top:0px;
+}
+#frm-signup .text-control
+{
+    color:#111;
+    width:190px;
+}
+#frm-signup .txt-bg-btn
+{
+    background:url('../Images/login/txt-bg.png') no-repeat;
+    width:180px;
+    height:47px;
+    padding-top:11px;
+    margin-left:300px;
+}
+#frm-signup .signup-spacer-copyright
+{
+    padding-top:70px;
+    font-size:12px;
+    font-weight:bold;
+}
+.txt-bg
+{
+    background:url('../Images/signup/txt-bg-signup.png') no-repeat;
+    width:280px;
+    height:37px;
+    padding:14.3px 0px 0px 0px;
+}
+.txt-bg-password
+{
+    background:url('../Images/signup/txt-bg-signup.png') no-repeat;
+    width:450px;
+    height:37px;
+    padding:14.3px 0px 0px 0px;
+}
+.drop-bg
+{
+    width:230px;
+    height:34px;
+    padding:8px 6px 6px 0;
+}
+#frm-about
+{
+    background:url('../Images/eventbrief/main-bg.jpg') no-repeat;
+    width:948px;
+    height:768px;
+}
+#frm-profile
+{
+    background:url('../Images/eventbrief/main-bg.jpg') no-repeat;
+    width:948px;
+    height:768px;
+}
+#frm-signup .inputBox
+{
+    border:0;
+    width:190px;
+    height:21px; 
+    margin:-6px 0px 0px 18px;
+    outline:none
+}
+#frm-event_brief
+{
+    background:url('../Images/eventbrief/main-bg.jpg') no-repeat;
+    width:948px;
+    height:768px;
+}
+#frm-event_details
+{
+    background:url('../Images/eventbrief/main-bg.jpg') no-repeat;
+    width:948px;
+    height:768px;
+}
+#headSpacer{padding:65px 0 0 500px; }
+.dvTabGeneral
+{
+    background:url('../Images/global/EmptyTab.png') no-repeat;
+    width:94px;
+    height:38px;
+    padding:6px 0;
+}
+.dvTabGeneral:hover
+{
+    background:url('../Images/global/EmptyHTab.png') no-repeat;
+}     
+.preload
+{
+    background-image:url('../Images/global/EmptyHTab.png');
+}
+a.hlymnu{color:Black; text-decoration:none;}
+a.hlymnucurrent{color:#434D56; text-decoration:none;}
+.text-control
+{
+    width:150px;
+    border:0;
+}
+.clearfix
+{
+    clear:both;
+    margin:0;
+    padding:0;
+    float:none;
+}
+.fr{float:right;}
+.fl{float:left;}
+/*font classes*/
+.w10{ font-size:10px; }
+.wi10{ font-size:10px; font-style:italic;}
+.wb10{ font-size:1px; font-weight:bold; }
+.w12{ font-size:12px; }
+.wib12{ font-size:12px; font-style:italic; font-weight:bold;}
+.wb12{ font-size:12px; font-weight:bold; }
+.w14{ font-size:14px; }
+.wb14{ font-size:14px; font-weight:bold; }
+.w16{ font-size:16px; }
+.wb16{ font-size:16px; font-weight:bold; }
+.w18{ font-size:18px; }
+.wb18{ font-size:18px; font-weight:bold; }
+.w20{ font-size:20px; }
+.wb20{ font-size:20px; font-weight:bold; }
+.w22{ font-size:22px; }
+.wb22{ font-size:22px; font-weight:bold; }
+.w24{ font-size:24px; }
+.wb24{ font-size:24px; font-weight:bold; }
+.w26{ font-size:26px; }
+.wb26{ font-size:26px; font-weight:bold; }
+.h24{ height:24px;}
+.myButton
+{
+    font-size:16px;
+    height:24px;
+    line-height:12px;
+}
+.myButton12
+{
+    font-size:12px;
+    height:24px;
+    line-height:0px;
+    text-align:center;
+    margin-top:5px;
+    padding:0px 15px 2px 14px;
+}
+
+/*link classes*/
+a.blue, a.blue:active, a.blue:visited{color:Blue;}
+.wrapper {
+margin: 0 auto;
+width: 780px;
+text-align: left;
+background: url(images/pr-background.jpg) repeat-y;
+border: 1px solid #000;
+}
+.wide 
+{
+    margin: 50px 0px 20px 0px;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    color: Black;
+    text-align: right;
+    padding: 0 0px 0 0px;
+}
+.wide p {margin: 0; padding: 0px; position: relative;}
+.top {}
+.top a {padding: 0 70px 0 30px; text-align: right; font-size: 1em; color: #006400;}
+.modalPopupTimeDateLabel
+{
+    margin:10px 0px 0px 20px;
+}
+.modalPopupTimeDate
+{
+    margin:0px 0px 0px 20px;
+}
+#inputRangeStart, #inputRangeFinish
+{
+    background-image:url("../Images/global/calendar.png");
+    background-position:right center;
+    background-repeat:no-repeat; 
+}
+.dateTimeTextBox
+{
+    background-position:right center;
+    background-repeat:no-repeat; 
+}
+.timeTextBox
+{
+    background-image:url("../Images/global/clock1.png");
+}
+.calendarTextBox
+{
+    background-image:url("../Images/global/calendar.png");
+}
+.calendarTheme .ajax__calendar_container {
+    border:3px solid #646464;
+    background-color: #F0F0F1;
+    color: black;
+} 
+.calendarTheme .ajax__calendar_header 
+{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:medium;
+    background-color: #C0C0C1;
+}
+.calendarTheme .ajax__calendar_active 
+{
+    border:1px dashed black;
+    background-color: #D7D7D7;
+    font-weight:bold
+}
+.calendarTheme .ajax__calendar_hover
+{
+    background-color: #DFDFE6;
+}
+.ajax__calendar_days
+{
+    background-color: white;
+}
+.test
+{
+    background-color: #C0C0C1;
+}
+.scrollItemHoldingsText
+{
+    padding-left: 5px;
+    font-size:0.5em;
+}
+.smallStar
+{
+    padding-bottom: 5pt;
+}
+.opc40
+{
+    opacity:0.4;
+    filter:alpha(opacity=40);
+}
+.bigStar
+{
+    margin:14px 0px 0px 6px;
+}
+.EventDetail
+{
+    border-color:#D8DFE6;
+    border-style:dotted;
+    border-width:1.0px;
+    font-family:Arial, sans-serif;
+    text-align:left;   
+    background:	#F6FBFF;
+    width:360px;
+}
+.lEventDetail
+{
+    padding:6px 2px 0px 4px;
+    background:#F0F8FF;
+    font-size:1.25em;
+    width:130px;
+    float:left;
+    height:32px;
+}
+.rEventDetail
+{
+    padding:10px 2px 2px 4px;
+    margin-left:0px;
+    font-size:1.0em;
+    width:210px;
+    float:right;
+    height:26px;
+}
+.myItemHoldings
+{
+    border-color:#F5F5AC;
+    border-style:dotted;
+    border-width:1px;
+    background:white;
+    font-family:Arial, sans-serif;
+    font-size:1.0em;
+    padding:1px;
+    padding-left:2px;
+    margin:0;
+    text-align:left;   
+    cursor: pointer;
+}
+.nmCBoxS
+{
+    display:none;
+    height:17px;
+}
+.nmChkTF
+{
+    margin-right:6px;
+}
+.profileLabels
+{
+    padding:6px 2px 0px 4px;
+    font-size:1.25em;
+    width:200px;
+    float:left;
+    text-align:left;
+    height:32px;
+}
+.profileTxtBg
+{
+    background:url('../Images/signup/txt-bg-signup.png') no-repeat;
+    width:280px;
+    height:37px;
+    padding-top:8px;
+}
+.profileSpacer
+{
+    float:left;
+    padding-top:10px;
+}
+.profileTxtBox
+{
+    border:0;
+    width:190px;
+    height:21px;
+    margin-left:18px; 
+    outline:none   
+}

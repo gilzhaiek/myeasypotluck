@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F23564C1-9A90-48F9-A603-86BA185ABE85}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyEasyObjects</RootNamespace>
+    <AssemblyName>MyEasyObjects</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Event\EventBase.cs" />
+    <Compile Include="Icons\DefaultIconsList.cs" />
+    <Compile Include="Item\ItemBase.cs" />
+    <Compile Include="Object\ObjectLocation.cs" />
+    <Compile Include="Object\UserNameImageList.cs" />
+    <Compile Include="Holding\HoldingsInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\ResourceBase.cs" />
+    <Compile Include="Resource\ResourceDescription.cs" />
+    <Compile Include="Resource\ResourceImage.cs" />
+    <Compile Include="Resource\ResourceNote.cs" />
+    <Compile Include="Event\EventTimeInfo.cs" />
+    <Compile Include="User\UserBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyEasyCommon\MyEasyCommon.csproj">
+      <Project>{FF8FA4AC-D07C-4DD6-A1B9-CAB43E95561D}</Project>
+      <Name>MyEasyCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\apple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\banana_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\beer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\bread1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\breads.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\burger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cheese.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\coffeecup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Coffeematic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\coffeepot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Coke_Classic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Coke_Zero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Containers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cookies.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Cupcakes-Buttercream.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Diet_Coke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\french_fries_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\grape_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\hamburger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\hot_dog_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pear_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\PieTin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pineapple_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Pitcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pizza_slice_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\salada_maki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\sliced_bread.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\toast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\water_melon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\yoghurt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\Administrator-icon.png" />
+    <Content Include="Icons\Help-icon.png" />
+    <Content Include="Icons\Office-Girl-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

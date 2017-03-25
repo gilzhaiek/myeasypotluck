@@ -1,0 +1,426 @@
+﻿.modelBackground {
+	background-color:Gray;
+	filter:alpha(opacity=70);
+	opacity:0.7;
+}
+.modalPopup {
+	background-color:#ffffdd;
+	border-width:6px;
+	border-style:solid;
+	border-color:Black;
+	padding:3px;
+	width:400px;
+}
+.outerPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:400px;   
+}
+.innerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:400px;
+}
+.innerInnerPopup
+{
+    background-color:#fff;
+    width:384px;
+}
+#friendsContainer
+{
+   width:330px;
+   margin-left:20px;
+}
+#friendsBox
+{
+    width:330px;
+    height:80px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+}
+#scrollContainer
+{
+       width:400px;
+       margin:0px;
+       padding:0px;
+}
+#scrollBox
+{
+    width:400px;
+    height:270px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+}
+#scrollViewBox
+{
+    width:400px;
+    height:380px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+}
+.customItemOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:460px;   
+}
+.customItemInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:460px;
+}
+.customItemInnerInnerPopup
+{
+    background-color:#fff;
+    width:444px;
+}
+.newItemOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:560px;   
+}
+.newItemInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:560px;
+}
+.newItemInnerInnerPopup
+{
+    background-color:#fff;
+    width:544px;
+}
+#newItemContainer
+{
+   width:500px;
+   margin:0px auto;
+   padding:00px 0;
+}
+#newItemBox
+{
+    width:500px;
+    height:300px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 30px 0px 0px 0px;
+}
+.iconOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:360px;   
+}
+.iconInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:360px;
+}
+.iconInnerInnerPopup
+{
+    background-color:#fff;
+    width:344px;
+}
+#iconContainer
+{
+   width:300px;
+   margin:0px auto;
+   padding:00px 0;
+}
+#iconBox
+{
+    width:300px;
+    height:300px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 0px 0px 0px 0px;
+}
+#holdingsContainer
+{
+   width:260px;
+   margin:0px 0px 0px 9px;
+   clear:both;
+   float:left;
+}
+#holdingsBox
+{
+    width:260px;
+    height:70px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 0px 0px 0px 0px;
+}
+.iconPopup
+{
+    background:white;
+    border:1px dashed;
+    border-color:gray;
+    padding:4px;
+    width: 24px;
+    height: 24px;
+}
+.detailedPanel
+{
+    border-color:#F5F5DC;
+    border-style:solid;
+    border-width:1px;
+    position:absolute;
+}
+.boxBorder
+{
+    border:1px solid #708090;
+}
+.scrollItemsDiv
+{
+    border-color:#F5F5AC;
+    border-style:dotted;
+    border-width:1px;
+    background:white;
+    font-family:Arial, sans-serif;
+    font-size:1.50em;
+    padding:5px;
+    padding-left:5px;
+    margin:0;
+    text-align:left;   
+    cursor:pointer;
+}
+.addFriendOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:360px;   
+}
+.addFriendInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:360px;
+}
+.addFriendInnerInnerPopup
+{
+    background-color:#fff;
+    width:344px;
+}
+#addFriendContainer
+{
+   width:300px;
+   margin:0px 0px 0px 20px;
+   padding:00px 0;
+}
+#addFriendBox
+{
+    width:300px;
+    height:140px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 0px 0px 0px 0px;
+}
+#friendInviteContainer
+{
+   width:300px;
+   margin:0px 0px 0px 20px;
+   padding:00px 0;
+}
+#friendInviteBox
+{
+    width:300px;
+    height:80px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 0px 0px 0px 0px;
+}
+.emailReminderOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:360px;   
+}
+.emailReminderInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:360px;
+}
+.emailReminderInnerInnerPopup
+{
+    background-color:#fff;
+    width:344px;
+}
+.msgOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:260px;   
+}
+.msgInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:260px;
+}
+.msgInnerInnerPopup
+{
+    background-color:#fff;
+    width:244px;
+}
+.pendingEmailInviteItems
+{
+    border-color:#F5F5AC;
+    border-style:dotted;
+    border-width:1px;
+    background:white;
+    font-family:Arial, sans-serif;
+    font-size:1.0em;
+    padding:1px;
+    padding-left:2px;
+    margin:0;
+    text-align:left;   
+}
+.emailInviteOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:440px;   
+}
+.emailInviteInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:440px;
+}
+.emailInviteInnerInnerPopup
+{
+    background-color:#fff;
+    width:424px;
+}
+.loadingPopup
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:100px;   
+}
+.myFriendsItems
+{
+    border-color:#F5F5AC;
+    border-style:dotted;
+    border-width:1px;
+    background:white;
+    font-family:Arial, sans-serif;
+    font-size:1.0em;
+    padding:1px;
+    padding-left:2px;
+    margin:0;
+    text-align:left;   
+    cursor: pointer;
+}
+#eventsContainer
+{
+   width:360px;
+   margin:0px 0px 0px 0px;
+   clear:both;
+   float:left;
+}
+#eventsBox
+{
+    width:360px;
+    height:320px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 0px 0px 0px 0px;
+}
+.myEventsTopicItems,
+.myEventsDescriptionItems
+{
+    border-color:#D8DFE6;
+    border-style:dotted;
+    border-width:1.0px;
+    font-family:Arial, sans-serif;
+    margin:0;
+    text-align:left;   
+    cursor: pointer;
+}
+.myEventsTopicItems
+{
+    padding:1px 1px 1px 1px;
+    background:#F0F8FF;
+    font-size:1.5em;
+}
+.myEventsDescriptionItems
+{
+    padding:2px 5px 2px 5px;
+    background:#EAEAEA;
+    font-size:1.0em;
+    color:#4D4D4D;
+}
+#eventDetailsContainer
+{
+   width:360px;
+   margin:0px 0px 0px 0px;
+   clear:both;
+   float:left;
+}
+#eventDetailsBox
+{
+    width:360px;
+    height:320px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+    margin: 0px 0px 0px 0px;
+}
+.mapsOuterPopup 
+{
+    background-color:transparent;
+    padding:1em 6px;
+    width:460px;   
+}
+.mapsInnerOuterPopup
+{
+    border-width:16px;
+    background-color:#000000;
+    width:460px;
+}
+.mapsInnerInnerPopup
+{
+    background-color:#fff;
+    width:444px;
+}
+#invitesContainer
+{
+   width:330px;
+   margin-left:20px;
+}
+#invitesBox
+{
+    width:330px;
+    height:80px;
+    overflow:auto;
+    overflow-x:hidden;
+    background-color:white;
+}
+.myInvitedEvents
+{
+    border-color:#D8DFE6;
+    border-style:dotted;
+    border-width:1.0px;
+    font-family:Arial, sans-serif;
+    margin:0;
+    text-align:left;   
+    cursor: pointer;
+    padding:1px 1px 1px 1px;
+    background:#F0F8FF;
+    font-size:1em;
+}

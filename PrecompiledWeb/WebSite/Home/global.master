@@ -1,0 +1,31 @@
+<%@ master language="C#" autoeventwireup="true" inherits="WebSite_global, App_Web_nmajzrba" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>MyEasyPotLuck - A Potluck Event Organizer</title>
+	<meta name="DESCRIPTION" content="A Potluck Event Organizer.  Create a list of items to bring, invite your friends and share your items." />
+	<meta name="KEYWORDS" content="Potluck, Party, BBQ, Organizing, Social, Church, Gatherings, Friends" />
+    
+    <link href="../css/basic.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../css/anytime.css" />
+    <link rel="stylesheet" type="text/css" href="../css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="../css/panels.css" />
+</head>
+<body>
+    <script type="text/javascript" src="../WebSite/JavaScript/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../WebSite/JavaScript/anytimec.js"></script>
+    <script type="text/javascript" src="../WebSite/JavaScript/anytimetz.js"></script>   
+   
+    <center>
+        <form id="frmain" runat="server">
+        <div>
+            <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+            </asp:contentplaceholder>
+        </div>
+        </form>
+    </center>
+    <div class="preload" ></div> 
+</body>
+</html>

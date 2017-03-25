@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MyEasySite.master.cs" Inherits="MyEasyWebApp.Views.MyEasySite" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+            margin-bottom: 0px;
+        }
+        .style3
+        {
+            width: 380px;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff">
+    <form id="form1" runat="server">
+    <div>
+    </div>
+    <table class="style1">
+        <tr>
+            <td height="48" bgcolor="#F0F0FF" style="height: 24px" colspan="2">
+                <asp:Image ID="Image1" runat="server" Height="42px" 
+                    ImageUrl="~/Images/Logo.png" Width="241px" />
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="White" colspan="2">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="White" height="48" class="style3">
+                <span>Copyright © 2010 <a href="http://www.myeasypotluck.com/">MyEasyPotluck.com</a> 
+                All rights reserved.</span>
+            </td>
+            <td bgcolor="White" height="48">
+                <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="Home.aspx" Text="Home | " Value="Home"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="About.aspx" Text="About" Value="About">
+                        </asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </td>
+        </tr>
+    </table>
+    </form>
+    </body>
+</html>

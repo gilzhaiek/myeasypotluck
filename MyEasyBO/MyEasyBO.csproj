@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F3D78076-6D2B-494E-88E2-09E54B6D31A9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyEasyBO</RootNamespace>
+    <AssemblyName>MyEasyBO</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Event\EventAddUserBO.cs" />
+    <Compile Include="Event\EventBaseBO.cs" />
+    <Compile Include="Event\EventsInvitationsBO.cs" />
+    <Compile Include="Item\ItemBaseBO.cs" />
+    <Compile Include="LoginManagerBO.cs" />
+    <Compile Include="Object\ObjectLocationBO.cs" />
+    <Compile Include="Object\UserNameImageListBO.cs" />
+    <Compile Include="Holding\HoldingsInfoBO.cs" />
+    <Compile Include="ProjectAdminBO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceBO\ResourceBaseBO.cs" />
+    <Compile Include="ResourceBO\ResourceDescriptionBO.cs" />
+    <Compile Include="ResourceBO\ResourceImageBO.cs" />
+    <Compile Include="ResourceBO\ResourceNoteBO.cs" />
+    <Compile Include="Event\EventTimeInfoBO.cs" />
+    <Compile Include="UserBO\FriendBaseBO.cs" />
+    <Compile Include="UserBO\UserBaseBO.cs" />
+    <Compile Include="UserBO\UsersConnectionBO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyEasyCommon\MyEasyCommon.csproj">
+      <Project>{FF8FA4AC-D07C-4DD6-A1B9-CAB43E95561D}</Project>
+      <Name>MyEasyCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyEasyDataAccess\MyEasyIDAL.csproj">
+      <Project>{76B97E02-0FBC-4D6E-98AB-787CEFA490AE}</Project>
+      <Name>MyEasyIDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyEasyDummyAccess\MyEasyDAL.csproj">
+      <Project>{24F33EAE-9A83-4089-8109-CC79C414EAC3}</Project>
+      <Name>MyEasyDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyEasyObjects\MyEasyObjects.csproj">
+      <Project>{F23564C1-9A90-48F9-A603-86BA185ABE85}</Project>
+      <Name>MyEasyObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

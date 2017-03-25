@@ -1,0 +1,368 @@
+﻿.goButton {
+	display:block;
+	width:70px;
+	height:45px;
+	text-indent:-9999px;
+}
+.goButton a {
+	display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/goButton.png') no-repeat top left;
+	outline:none;
+}
+.needReminder {
+	display:block;
+	width:112px;
+	height:25px;
+	text-indent:-9999px;
+}
+.needReminder a {
+	display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/needReminder.png') no-repeat top left;
+	outline:none;
+}
+.addNewEventButton 
+{
+    display:block;
+	width:222px;
+	height:47px;
+	text-indent:-9999px;
+	padding: 0px;
+	margin: 0px;
+}
+.addNewEventButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/addNewEventButton.png') no-repeat top left;
+	outline:none;
+}
+.openEventButton 
+{
+    display:block;
+	width:147px;
+	height:33px;
+	text-indent:-9999px;
+	padding: 0px;
+	margin: 0px;	
+}
+.openEventButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/openEventButton.png') no-repeat top left;
+	outline:none;
+}
+.deleteEventButton 
+{
+    display:block;
+	width:147px;
+	height:33px;
+	text-indent:-9999px;
+	padding: 0px;
+	margin: 0px;	
+}
+.deleteEventButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/deleteEventButton.png') no-repeat top left;
+	outline:none;
+}
+.createMeButton 
+{
+    display:block;
+	width:222px;
+	height:47px;
+	text-indent:-9999px;
+}
+.createMeButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/createMeButton.png') no-repeat top left;
+	outline:none;
+}
+.validateButton
+{
+    display:block;
+	width:16px;
+	height:16px;
+	text-indent:-9999px;
+}
+.validateButton a 
+{
+    margin-top:0px;
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/global/validate.png') no-repeat top left;
+	outline:none;
+}
+.passwordTooShortButton
+{
+    display:block;
+	width:185px;
+	height:15px;
+	text-indent:-9999px;
+}
+.passwordTooShortButton a 
+{
+    margin-top:0px;
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/signup/passwordTooShort.png') no-repeat top left;
+	outline:none;
+}
+.friendProfileButton 
+{
+    display:block;
+	width:118px;
+	height:27px;
+	text-indent:-9999px;
+}
+.friendProfileButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/friendProfile.png') no-repeat top left;
+	outline:none;
+}
+.removeFriendButton 
+{
+    display:block;
+	width:118px;
+	height:27px;
+	text-indent:-9999px;
+}
+.removeFriendButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/removeFriend.png') no-repeat top left;
+	outline:none;
+}
+.addFriendButton 
+{
+    display:block;
+	width:118px;
+	height:27px;
+	text-indent:-9999px;
+}
+.addFriendButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/addFriend.png') no-repeat top left;
+	outline:none;
+}
+.createCustomItemButton 
+{
+    display:block;
+	width:146px;
+	height:33px;
+	text-indent:-9999px;
+}
+.createCustomItemButton  a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/createCustomItem.png') no-repeat top left;
+	outline:none;
+}
+.addMoreItemsButton 
+{
+    display:block;
+	width:146px;
+	height:33px;
+	text-indent:-9999px;
+}
+.addMoreItemsButton  a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/addMoreItems.png') no-repeat top left;
+	outline:none;
+}
+.holdItemButton 
+{
+    display:block;
+	width:111px;
+	height:25px;
+	text-indent:-9999px;
+}
+.holdItemButton  a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/holdItemButton.png') no-repeat top left;
+	outline:none;
+}
+.plusButton 
+{
+    display:block;
+	width:34px;
+	height:33px;
+	text-indent:-9999px;
+}
+.plusButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/plusButton.png') no-repeat top left;
+	outline:none;
+}
+.minusButton 
+{
+    display:block;
+	width:34px;
+	height:33px;
+	text-indent:-9999px;
+}
+.minusButton  a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/minusButton.png') no-repeat top left;
+	outline:none;
+}
+.saveEventButton 
+{
+    display:block;
+	width:127px;
+	height:33px;
+	text-indent:-9999px;
+}
+.saveEventButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/saveEventButton.png') no-repeat top left;
+	outline:none;
+}
+.publicLinkButton
+{
+    display:block;
+	width:127px;
+	height:33px;
+	text-indent:-9999px;
+}
+.publicLinkButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/publicLinkButton.png') no-repeat top left;
+	outline:none;
+}
+.deleteItemButton 
+{
+    display:block;
+	width:127px;
+	height:33px;
+	text-indent:-9999px;
+}
+.deleteItemButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/deleteItemButton.png') no-repeat top left;
+	outline:none;
+}
+.saveItemButton 
+{
+    display:block;
+	width:127px;
+	height:33px;
+	text-indent:-9999px;
+}
+.saveItemButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/saveItemButton.png') no-repeat top left;
+	outline:none;
+}
+.acceptInviteButton 
+{
+    display:block;
+	width:118px;
+	height:27px;
+	text-indent:-9999px;
+	padding: 0px;
+	margin: 0px;	
+}
+.acceptInviteButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/acceptInviteButton.png') no-repeat top left;
+	outline:none;
+}
+.rejectInviteButton 
+{
+    display:block;
+	width:118px;
+	height:27px;
+	text-indent:-9999px;
+	padding: 0px;
+	margin: 0px;	
+}
+.rejectInviteButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/rejectInviteButton.png') no-repeat top left;
+	outline:none;
+}
+.saveMeButton 
+{
+    display:block;
+	width:222px;
+	height:47px;
+	text-indent:-9999px;
+}
+.saveMeButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/saveMeButton.png') no-repeat top left;
+	outline:none;
+}
+.yesNoButton 
+{
+    display:block;
+	width:35px;
+	height:16px;
+	text-indent:-9999px;
+}
+.yesNoButton a 
+{
+    display:block;
+	width:100%;
+	height:100%;
+	background:transparent url('../Images/buttons/yesNoButton.png') no-repeat top left;
+	outline:none;
+}
