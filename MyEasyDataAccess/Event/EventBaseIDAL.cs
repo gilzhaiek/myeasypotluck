@@ -6,14 +6,14 @@ using MyEasyObjects.Event;
 
 namespace MyEasyIDAL.Event
 {
-	public interface EventBaseIDAL
-	{
-		void Load(EventBase eventBase, UInt64 uniqueID);
+    public interface EventBaseIDAL
+    {
+        void Load(EventBase eventBase, UInt64 uniqueID);
 
-		bool IsLatest(EventBase eventBase, bool checkRelations);
+        bool IsLatest(EventBase eventBase, bool checkRelations);
 
-		void Save(EventBase eventBase);
+        void Save(EventBase eventBase);
 
-		List<UInt64> GetChildrenUniqueIDs(UInt64 eventParentUniqueID);
-	}
+        List<UInt64> GetChildrenUniqueIDs(UInt64 eventParentUniqueID);
+    }
 }

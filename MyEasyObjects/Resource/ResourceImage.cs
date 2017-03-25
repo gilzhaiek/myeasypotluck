@@ -11,197 +11,197 @@ using System.ComponentModel;
 
 namespace MyEasyObjects.Resource
 {
-	public class ResourceImage : MyObjectBase, INotifyPropertyChanged
-	{
-		#region Members
+    public class ResourceImage : MyObjectBase, INotifyPropertyChanged
+    {
+        #region Members
 
-		UserBase			mImageOwner;
+        UserBase mImageOwner;
 
-		ResourceBase		mResourceBase;
+        ResourceBase mResourceBase;
 
-		string				mImageLocation	= ""; 
-		
-		DateTime?			mEntryDate		= null;
+        string mImageLocation = "";
 
-		#endregion
+        DateTime? mEntryDate = null;
 
-		#region constructor
+        #endregion
 
-		public ResourceImage()
-		{
-			mResourceBase	= new ResourceBase();
-			mImageOwner		= new UserBase();
-		}
+        #region constructor
 
-		public ResourceImage(UInt64 uniqueID)
-			: base(uniqueID)
-		{
-			mResourceBase	= new ResourceBase();
-			mImageOwner		= new UserBase();
-		}
+        public ResourceImage()
+        {
+            mResourceBase = new ResourceBase();
+            mImageOwner = new UserBase();
+        }
+
+        public ResourceImage(UInt64 uniqueID)
+            : base(uniqueID)
+        {
+            mResourceBase = new ResourceBase();
+            mImageOwner = new UserBase();
+        }
 
 
-		public ResourceImage(UInt64 uniqueID, UserBase imageOwner, string imageLocation, DateTime? entryDate)
-			: base(uniqueID)
-		{
-			mResourceBase	= new ResourceBase();
-			mImageOwner		= imageOwner;
-			mImageLocation	= imageLocation;
-			mEntryDate		= entryDate;
-		}
+        public ResourceImage(UInt64 uniqueID, UserBase imageOwner, string imageLocation, DateTime? entryDate)
+            : base(uniqueID)
+        {
+            mResourceBase = new ResourceBase();
+            mImageOwner = imageOwner;
+            mImageLocation = imageLocation;
+            mEntryDate = entryDate;
+        }
 
-		public ResourceImage(UInt64 uniqueID, UserBase imageOwner, string imageLocation, DateTime? entryDate, ResourceBase resourceBase)
-			: base(uniqueID)
-		{
-			mResourceBase	= resourceBase;
-			mImageOwner		= imageOwner;
-			mImageLocation	= imageLocation;
-			mEntryDate		= entryDate;
-		}	
+        public ResourceImage(UInt64 uniqueID, UserBase imageOwner, string imageLocation, DateTime? entryDate, ResourceBase resourceBase)
+            : base(uniqueID)
+        {
+            mResourceBase = resourceBase;
+            mImageOwner = imageOwner;
+            mImageLocation = imageLocation;
+            mEntryDate = entryDate;
+        }
 
-		#endregion
+        #endregion
 
-		public ResourceBase	ResourceBase
-		{
-			get {return mResourceBase;}
-			set { mResourceBase = value;}
-		}
+        public ResourceBase ResourceBase
+        {
+            get { return mResourceBase; }
+            set { mResourceBase = value; }
+        }
 
-		public UserBase		ImageOwner
-		{ 
-			get { return mImageOwner; }
-			set { ImageOwner = value;}
-		}
+        public UserBase ImageOwner
+        {
+            get { return mImageOwner; }
+            set { ImageOwner = value; }
+        }
 
-		public string		ImageLocation
-		{	
-			get { return mImageLocation; } 
-			set { mImageLocation = value;}
-		}
+        public string ImageLocation
+        {
+            get { return mImageLocation; }
+            set { mImageLocation = value; }
+        }
 
-		public DateTime?		EntryDate
-		{
-			get { return mEntryDate; }
-			set { EntryDate = value;}
-		}
+        public DateTime? EntryDate
+        {
+            get { return mEntryDate; }
+            set { EntryDate = value; }
+        }
 
-		#region String Conversion Members
+        #region String Conversion Members
 
-		public override string ToString()
-		{
-			if (IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
-			else
-			{
-				string retStr = UniqueID.ToString();
+        public override string ToString()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
+            else
+            {
+                string retStr = UniqueID.ToString();
 
-				retStr += mDelim + ImageOwner.UniqueID.ToString();
+                retStr += mDelim + ImageOwner.UniqueID.ToString();
 
-				retStr += mDelim + ResourceBase.UniqueID.ToString();
+                retStr += mDelim + ResourceBase.UniqueID.ToString();
 
-				retStr += mDelim + ImageLocation;
+                retStr += mDelim + ImageLocation;
 
-				if(EntryDate != null)
-					retStr += mDelim + EntryDate.Value.Ticks.ToString();
-				else
-					retStr += mDelim + "0";
+                if (EntryDate != null)
+                    retStr += mDelim + EntryDate.Value.Ticks.ToString();
+                else
+                    retStr += mDelim + "0";
 
-				return retStr ;
-			}
-		}
-		
-		public static ResourceImage Parse(SqlString sqlStr)
-		{
-			if (sqlStr.IsNull)
-				return null;
-			else
-			{
-				return Parse(Convert.ToString(sqlStr));
-			}
-		}
+                return retStr;
+            }
+        }
 
-		public static ResourceImage Parse(string str)
-		{
-			int strCnt = 0;
+        public static ResourceImage Parse(SqlString sqlStr)
+        {
+            if (sqlStr.IsNull)
+                return null;
+            else
+            {
+                return Parse(Convert.ToString(sqlStr));
+            }
+        }
 
-			ResourceImage image = new ResourceImage();
-			
-			string[] strSplit = null;
-			strSplit = str.Split(new char[] { ';' });
+        public static ResourceImage Parse(string str)
+        {
+            int strCnt = 0;
 
-			strCnt = Parse(image, strSplit, strCnt);
+            ResourceImage image = new ResourceImage();
 
-			return image;
-		}
-		
-		public static int Parse(ResourceImage image, string[] strSplit, int strCnt)
-		{
-			image.UniqueID				= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            string[] strSplit = null;
+            strSplit = str.Split(new char[] { ';' });
 
-			image.ImageOwner.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            strCnt = Parse(image, strSplit, strCnt);
 
-			image.ResourceBase.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            return image;
+        }
 
-			image.ImageLocation			= strSplit[strCnt]; strCnt++;
+        public static int Parse(ResourceImage image, string[] strSplit, int strCnt)
+        {
+            image.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-			image.EntryDate				= new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
+            image.ImageOwner.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-			return strCnt;
-		}
+            image.ResourceBase.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		#endregion
-		
-		#region IComparable Members
+            image.ImageLocation = strSplit[strCnt]; strCnt++;
 
-		//Override the Equals method        
-		public override bool Equals(object other)
-		{
-			return CompareTo(other) == 0;
-		}
+            image.EntryDate = new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
 
-		//Override the GetHashCode method
-		public override int GetHashCode()
-		{
-			if(IsNull)// || (!IsLoaded()))
-				return 0;
+            return strCnt;
+        }
 
-			return this.ToString().GetHashCode();
-		}
+        #endregion
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Other object is null
-		//		The argument to compare is not a UserBase
-		//		Refering object (this) is null
-		public override int CompareTo(object other)
-		{
-			if (other == null)
-				throw new System.ArgumentException("Other object is null", "other");
+        #region IComparable Members
 
-			ResourceImage resourceImage = other as ResourceImage;
+        //Override the Equals method        
+        public override bool Equals(object other)
+        {
+            return CompareTo(other) == 0;
+        }
 
-			if (resourceImage == null)
-				throw new System.ArgumentException("The argument to compare is not a resourceImage", "other");
+        //Override the GetHashCode method
+        public override int GetHashCode()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                return 0;
 
-			if(IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("Refering object (this) is null", "this");
+            return this.ToString().GetHashCode();
+        }
 
-			return this.ToString().CompareTo(resourceImage.ToString());
-		}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Other object is null
+        //		The argument to compare is not a UserBase
+        //		Refering object (this) is null
+        public override int CompareTo(object other)
+        {
+            if (other == null)
+                throw new System.ArgumentException("Other object is null", "other");
 
-		#endregion
+            ResourceImage resourceImage = other as ResourceImage;
 
-		#region INotifyPropertyChanged Members
+            if (resourceImage == null)
+                throw new System.ArgumentException("The argument to compare is not a resourceImage", "other");
 
-		public event PropertyChangedEventHandler PropertyChanged;
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("Refering object (this) is null", "this");
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if (handler != null)
-				handler(this, new PropertyChangedEventArgs(propertyName));
-		}
+            return this.ToString().CompareTo(resourceImage.ToString());
+        }
 
-		#endregion
-	}
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

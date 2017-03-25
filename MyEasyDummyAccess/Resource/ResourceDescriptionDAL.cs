@@ -11,69 +11,69 @@ using System.Data;
 
 namespace MyEasyDAL.Resource
 {
-	public class ResourceDescriptionDAL : MyObjectBaseDAL, ResourceDescriptionIDAL
-	{
-		public bool IsLatest(ResourceDescription resourceDescription)
-		{
-			ResourceDescription upToDateResourceDescription = new ResourceDescription();
+    public class ResourceDescriptionDAL : MyObjectBaseDAL, ResourceDescriptionIDAL
+    {
+        public bool IsLatest(ResourceDescription resourceDescription)
+        {
+            ResourceDescription upToDateResourceDescription = new ResourceDescription();
 
-			Load(upToDateResourceDescription, resourceDescription.OwnerUniqueID);
+            Load(upToDateResourceDescription, resourceDescription.OwnerUniqueID);
 
-			return (upToDateResourceDescription.LastDALChange == resourceDescription.LastDALChange);
-		}
+            return (upToDateResourceDescription.LastDALChange == resourceDescription.LastDALChange);
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		resourceDescription is null when saving ResourceDescription
-		public void	Save(ResourceDescription resourceDescription)
-		{
-			if(resourceDescription.IsNull)
-			{
-				throw new System.ArgumentException("resourceDescription is null when saving ResourceDescription", "resourceDescription");
-			}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		resourceDescription is null when saving ResourceDescription
+        public void Save(ResourceDescription resourceDescription)
+        {
+            if (resourceDescription.IsNull)
+            {
+                throw new System.ArgumentException("resourceDescription is null when saving ResourceDescription", "resourceDescription");
+            }
 
-			if(ResourceDescriptionExists(resourceDescription.UniqueID))
-			{
-				ResourceDescription upToDateItemBase = new ResourceDescription();
+            if (ResourceDescriptionExists(resourceDescription.UniqueID))
+            {
+                ResourceDescription upToDateItemBase = new ResourceDescription();
 
-				try
-				{
-					Load(upToDateItemBase, resourceDescription.UniqueID);
-				}
-				catch
-				{
-					SaveInternal(resourceDescription);
-					return;
-				}
+                try
+                {
+                    Load(upToDateItemBase, resourceDescription.UniqueID);
+                }
+                catch
+                {
+                    SaveInternal(resourceDescription);
+                    return;
+                }
 
-				if(resourceDescription.CompareTo(upToDateItemBase) != 0)
-					UpdateInternal(resourceDescription);
-			}
-			else
-				SaveInternal(resourceDescription);
-		}
-		// Exceptions:
-		//	System.ArgumentException:
-		public void	Delete(ResourceDescription resourceDescription)
-		{
-			if(resourceDescription.IsNull)
-			{
-				throw new System.ArgumentException("resourceDescription is null when removing ResourceDescription", "resourceDescription");
-			}
+                if (resourceDescription.CompareTo(upToDateItemBase) != 0)
+                    UpdateInternal(resourceDescription);
+            }
+            else
+                SaveInternal(resourceDescription);
+        }
+        // Exceptions:
+        //	System.ArgumentException:
+        public void Delete(ResourceDescription resourceDescription)
+        {
+            if (resourceDescription.IsNull)
+            {
+                throw new System.ArgumentException("resourceDescription is null when removing ResourceDescription", "resourceDescription");
+            }
 
-			if(ResourceDescriptionExists(resourceDescription.UniqueID))
-			{
-				DeleteInternal(resourceDescription);
-			}
-			else
-				throw new System.ArgumentException("resourceDescription does not exists while removing ResourceDescription", "resourceDescription");
-		}
+            if (ResourceDescriptionExists(resourceDescription.UniqueID))
+            {
+                DeleteInternal(resourceDescription);
+            }
+            else
+                throw new System.ArgumentException("resourceDescription does not exists while removing ResourceDescription", "resourceDescription");
+        }
 
 
-		public bool ResourceDescriptionExists(UInt64 uniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public bool ResourceDescriptionExists(UInt64 uniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
             try
             {
@@ -89,7 +89,7 @@ namespace MyEasyDAL.Resource
                 return rValue;
             }
             catch (Exception exception)
-            {                
+            {
                 throw exception;
             }
             finally
@@ -97,50 +97,50 @@ namespace MyEasyDAL.Resource
                 sqlReader.Close();
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		public void Load(ResourceDescription resourceDescription, UInt64 ownerUniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public void Load(ResourceDescription resourceDescription, UInt64 ownerUniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select * from ResourceDescription where OwnerUniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = ownerUniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select * from ResourceDescription where OwnerUniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = ownerUniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				if(!sqlReader.Read())
-				{
-					throw new System.ArgumentException("resourceDescription with OwnerUniqueID=" + ownerUniqueID.ToString() + " was not found", "ownerUniqueID");
-				}
-				
-				resourceDescription.OwnerUniqueID	= ownerUniqueID;
-				resourceDescription.LastDALChange	= Convert.ToInt64(sqlReader["LastDALChange"].ToString());
-				resourceDescription.Topic			= sqlReader["Topic"].ToString();
-				resourceDescription.Summary			= sqlReader["Summary"].ToString();
-				resourceDescription.Link			= sqlReader["Link"].ToString();
+                sqlReader = sqlCommand.ExecuteReader();
+                if (!sqlReader.Read())
+                {
+                    throw new System.ArgumentException("resourceDescription with OwnerUniqueID=" + ownerUniqueID.ToString() + " was not found", "ownerUniqueID");
+                }
 
-				if(sqlReader.Read())
-				{
-					throw new ArgumentException("Multiple OwnerUniqueID=" + ownerUniqueID.ToString() + " were found in ResourceDescription", "ownerUniqueID");
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-			finally
-			{
-				sqlReader.Close();
+                resourceDescription.OwnerUniqueID = ownerUniqueID;
+                resourceDescription.LastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
+                resourceDescription.Topic = sqlReader["Topic"].ToString();
+                resourceDescription.Summary = sqlReader["Summary"].ToString();
+                resourceDescription.Link = sqlReader["Link"].ToString();
+
+                if (sqlReader.Read())
+                {
+                    throw new ArgumentException("Multiple OwnerUniqueID=" + ownerUniqueID.ToString() + " were found in ResourceDescription", "ownerUniqueID");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                sqlReader.Close();
                 mSqlConnection.Close();
-			}
-		}
+            }
+        }
 
-		protected void UpdateInternal(ResourceDescription resourceDescription)
-		{
+        protected void UpdateInternal(ResourceDescription resourceDescription)
+        {
             try
             {
                 resourceDescription.LastDALChange = DateTime.Now.Ticks;
@@ -177,10 +177,10 @@ namespace MyEasyDAL.Resource
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		protected void DeleteInternal(ResourceDescription resourceDescription)
-		{
+        protected void DeleteInternal(ResourceDescription resourceDescription)
+        {
             try
             {
                 resourceDescription.LastDALChange = DateTime.Now.Ticks;
@@ -205,10 +205,10 @@ namespace MyEasyDAL.Resource
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		protected void SaveInternal(ResourceDescription resourceDescription)
-		{
+        protected void SaveInternal(ResourceDescription resourceDescription)
+        {
             try
             {
                 resourceDescription.LastDALChange = DateTime.Now.Ticks;
@@ -245,6 +245,6 @@ namespace MyEasyDAL.Resource
             {
                 mSqlConnection.Close();
             }
-		}
-	}
+        }
+    }
 }

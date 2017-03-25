@@ -11,197 +11,197 @@ using System.ComponentModel;
 
 namespace MyEasyObjects.Resource
 {
-	public class ResourceNote : MyObjectBase, INotifyPropertyChanged
-	{
-		#region Members
+    public class ResourceNote : MyObjectBase, INotifyPropertyChanged
+    {
+        #region Members
 
-		UserBase		mNoteWriter;
+        UserBase mNoteWriter;
 
-		ResourceBase	mResourceBase;
+        ResourceBase mResourceBase;
 
-		string			mNote = "";
+        string mNote = "";
 
-		DateTime?		mEntryDate = null;
+        DateTime? mEntryDate = null; Í
 
-		#endregion
+        #endregion
 
-		#region constructor
+        #region constructor
 
-		public ResourceNote()
-		{
-			mNoteWriter		= new UserBase();
-			mResourceBase	= new ResourceBase();
-		}
+        public ResourceNote()
+        {
+            mNoteWriter = new UserBase();
+            mResourceBase = new ResourceBase();
+        }
 
-		public ResourceNote(UInt64 uniqueID)
-			: base(uniqueID)
-		{
-			mNoteWriter		= new UserBase();
-			mResourceBase	= new ResourceBase();
-		}
+        public ResourceNote(UInt64 uniqueID)
+            : base(uniqueID)
+        {
+            mNoteWriter = new UserBase();
+            mResourceBase = new ResourceBase();
+        }
 
-		public ResourceNote(UInt64 uniqueID, UserBase noteWriter, string note, DateTime? entryDate)
-			: base(uniqueID)
-		{
-			mNoteWriter		= noteWriter;
-			mResourceBase	= new ResourceBase();
-			mNote			= note;
-			mEntryDate		= entryDate;
-		}
+        public ResourceNote(UInt64 uniqueID, UserBase noteWriter, string note, DateTime? entryDate)
+            : base(uniqueID)
+        {
+            mNoteWriter = noteWriter;
+            mResourceBase = new ResourceBase();
+            mNote = note;
+            mEntryDate = entryDate;
+        }
 
-		public ResourceNote(UInt64 uniqueID, UserBase noteWriter, string note, DateTime? entryDate, ResourceBase resourceBase)
-			: base(uniqueID)
-		{
-			mNoteWriter		= noteWriter;
-			mResourceBase	= resourceBase;
-			mNote			= note;
-			mEntryDate		= entryDate;
-		}
+        public ResourceNote(UInt64 uniqueID, UserBase noteWriter, string note, DateTime? entryDate, ResourceBase resourceBase)
+            : base(uniqueID)
+        {
+            mNoteWriter = noteWriter;
+            mResourceBase = resourceBase;
+            mNote = note;
+            mEntryDate = entryDate;
+        }
 
-		#endregion
+        #endregion
 
-		public UserBase NoteWriter 
-		{
-			get { return mNoteWriter; } 
-			set { mNoteWriter = value;}
-		}
+        public UserBase NoteWriter
+        {
+            get { return mNoteWriter; }
+            set { mNoteWriter = value; }
+        }
 
-		public ResourceBase	ResourceBase
-		{
-			get {return mResourceBase;}
-			set { mResourceBase = value;}
-		}
+        public ResourceBase ResourceBase
+        {
+            get { return mResourceBase; }
+            set { mResourceBase = value; }
+        }
 
-		public string Note
-		{ 
-			get { return mNote; } 
-			set { mNote = value;}
-		}
+        public string Note
+        {
+            get { return mNote; }
+            set { mNote = value; }
+        }
 
-		public DateTime? EntryDate
-		{ 
-			get { return mEntryDate; } 
-			set { mEntryDate = value;}
-		}
+        public DateTime? EntryDate
+        {
+            get { return mEntryDate; }
+            set { mEntryDate = value; }
+        }
 
-		#region String Conversion Members
+        #region String Conversion Members
 
-		public override string ToString()
-		{
-			if (IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
-			else
-			{
-				string retStr = UniqueID.ToString();
+        public override string ToString()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
+            else
+            {
+                string retStr = UniqueID.ToString();
 
-				retStr += mDelim + NoteWriter.UniqueID.ToString();
+                retStr += mDelim + NoteWriter.UniqueID.ToString();
 
-				retStr += mDelim + ResourceBase.UniqueID.ToString();
+                retStr += mDelim + ResourceBase.UniqueID.ToString();
 
-				retStr += mDelim + Note;
+                retStr += mDelim + Note;
 
-				if(EntryDate != null)
-					retStr += mDelim + EntryDate.Value.Ticks.ToString();
-				else
-					retStr += mDelim + "0";
+                if (EntryDate != null)
+                    retStr += mDelim + EntryDate.Value.Ticks.ToString();
+                else
+                    retStr += mDelim + "0";
 
-				return retStr;
-			}
-		}
-		
-		public static ResourceNote Parse(SqlString sqlStr)
-		{
-			if (sqlStr.IsNull)
-				return null;
-			else
-			{
-				return Parse(Convert.ToString(sqlStr));
-			}
-		}
+                return retStr;
+            }
+        }
 
-		public static ResourceNote Parse(string str)
-		{
-			int strCnt = 0;
+        public static ResourceNote Parse(SqlString sqlStr)
+        {
+            if (sqlStr.IsNull)
+                return null;
+            else
+            {
+                return Parse(Convert.ToString(sqlStr));
+            }
+        }
 
-			ResourceNote note = new ResourceNote();
-			
-			string[] strSplit = null;
-			strSplit = str.Split(new char[] { ';' });
+        public static ResourceNote Parse(string str)
+        {
+            int strCnt = 0;
 
-			strCnt = Parse(note, strSplit, strCnt);
+            ResourceNote note = new ResourceNote();
 
-			return note;
-		}
-		
-		public static int Parse(ResourceNote note, string[] strSplit, int strCnt)
-		{
-			note.UniqueID				= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            string[] strSplit = null;
+            strSplit = str.Split(new char[] { ';' });
 
-			note.NoteWriter.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            strCnt = Parse(note, strSplit, strCnt);
 
-			note.ResourceBase.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            return note;
+        }
 
-			note.Note					= strSplit[strCnt]; strCnt++;
+        public static int Parse(ResourceNote note, string[] strSplit, int strCnt)
+        {
+            note.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-			note.EntryDate				= new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
+            note.NoteWriter.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-			return strCnt;
-		}
+            note.ResourceBase.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		#endregion
+            note.Note = strSplit[strCnt]; strCnt++;
 
-		
-		#region IComparable Members
+            note.EntryDate = new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
 
-		//Override the Equals method        
-		public override bool Equals(object other)
-		{
-			return CompareTo(other) == 0;
-		}
+            return strCnt;
+        }
 
-		//Override the GetHashCode method
-		public override int GetHashCode()
-		{
-			if(IsNull)// || (!IsLoaded()))
-				return 0;
+        #endregion
 
-			return this.ToString().GetHashCode();
-		}
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Other object is null
-		//		The argument to compare is not a UserBase
-		//		Refering object (this) is null
-		public override int CompareTo(object other)
-		{
-			if (other == null)
-				throw new System.ArgumentException("Other object is null", "other");
+        #region IComparable Members
 
-			ResourceNote resourceNote = other as ResourceNote;
+        //Override the Equals method        
+        public override bool Equals(object other)
+        {
+            return CompareTo(other) == 0;
+        }
 
-			if (resourceNote == null)
-				throw new System.ArgumentException("The argument to compare is not a resourceNote", "other");
+        //Override the GetHashCode method
+        public override int GetHashCode()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                return 0;
 
-			if(IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("Refering object (this) is null", "this");
+            return this.ToString().GetHashCode();
+        }
 
-			return this.ToString().CompareTo(resourceNote.ToString());
-		}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Other object is null
+        //		The argument to compare is not a UserBase
+        //		Refering object (this) is null
+        public override int CompareTo(object other)
+        {
+            if (other == null)
+                throw new System.ArgumentException("Other object is null", "other");
 
-		#endregion
+            ResourceNote resourceNote = other as ResourceNote;
 
-		#region INotifyPropertyChanged Members
+            if (resourceNote == null)
+                throw new System.ArgumentException("The argument to compare is not a resourceNote", "other");
 
-		public event PropertyChangedEventHandler PropertyChanged;
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("Refering object (this) is null", "this");
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if (handler != null)
-				handler(this, new PropertyChangedEventArgs(propertyName));
-		}
+            return this.ToString().CompareTo(resourceNote.ToString());
+        }
 
-		#endregion
-	}
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

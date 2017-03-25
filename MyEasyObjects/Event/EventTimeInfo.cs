@@ -9,224 +9,224 @@ using System.Data.SqlTypes;
 
 namespace MyEasyObjects.Event
 {
-	public class EventTimeInfo : MyObjectBase, INotifyPropertyChanged
-	{
-		#region Members
+    public class EventTimeInfo : MyObjectBase, INotifyPropertyChanged
+    {
+        #region Members
 
-		DateTime?	mCreationTime	= null;
-		DateTime?	mBecomeActive	= null;
-		DateTime?	mBecomeInactive = null;
+        DateTime? mCreationTime = null;
+        DateTime? mBecomeActive = null;
+        DateTime? mBecomeInactive = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor
-		
-		public EventTimeInfo()
-		{
-		}
+        #region Constructor
 
-		public EventTimeInfo(UInt64 uniqueID)
-			: base(uniqueID)
-		{
-		}
+        public EventTimeInfo()
+        {
+        }
 
-		public EventTimeInfo(UInt64 uniqueID, DateTime? creationTime)
-			: base(uniqueID)
-		{
-			mCreationTime	= creationTime;
-		}
+        public EventTimeInfo(UInt64 uniqueID)
+            : base(uniqueID)
+        {
+        }
 
-		public EventTimeInfo(UInt64 uniqueID, DateTime? creationTime, DateTime? becomeActive, DateTime? becomeInactive)
-			: base(uniqueID)
-		{
-			mCreationTime	= creationTime;
-			mBecomeActive	= becomeActive;
-			mBecomeInactive	= becomeInactive;
-		}
+        public EventTimeInfo(UInt64 uniqueID, DateTime? creationTime)
+            : base(uniqueID)
+        {
+            mCreationTime = creationTime;
+        }
 
-		#endregion
+        public EventTimeInfo(UInt64 uniqueID, DateTime? creationTime, DateTime? becomeActive, DateTime? becomeInactive)
+            : base(uniqueID)
+        {
+            mCreationTime = creationTime;
+            mBecomeActive = becomeActive;
+            mBecomeInactive = becomeInactive;
+        }
 
-		#region Properties
-		public UInt64 EventUniqueID
-		{
-			get {return UniqueID;}
-			set {UniqueID = value;}
-		}
+        #endregion
 
-		public DateTime? CreationTime
-		{
-			get { return mCreationTime; }
-			set
-			{
-				if(mCreationTime == null)
-				{
-					mCreationTime = value;
-					OnPropertyChanged("EventTimeInfo.CreationTime.Changed");
-				}
-				else if(mCreationTime.Value != value.Value)
-				{
-					mCreationTime = value;
-					OnPropertyChanged("EventTimeInfo.CreationTime.Changed");
-				}
-			}
-		}
+        #region Properties
+        public UInt64 EventUniqueID
+        {
+            get { return UniqueID; }
+            set { UniqueID = value; }
+        }
 
-		public DateTime? BecomeActive
-		{
-			get { return mBecomeActive; }
-			set
-			{
-				if(mBecomeActive == null)
-				{
-					mBecomeActive = value;
-					OnPropertyChanged("EventTimeInfo.BecomeActive.Changed");
-				}
-				else if(mBecomeActive.Value != value.Value)
-				{
-					mBecomeActive = value;
-					OnPropertyChanged("EventTimeInfo.BecomeActive.Changed");
-				}
-			}
-		}
+        public DateTime? CreationTime
+        {
+            get { return mCreationTime; }
+            set
+            {
+                if (mCreationTime == null)
+                {
+                    mCreationTime = value;
+                    OnPropertyChanged("EventTimeInfo.CreationTime.Changed");
+                }
+                else if (mCreationTime.Value != value.Value)
+                {
+                    mCreationTime = value;
+                    OnPropertyChanged("EventTimeInfo.CreationTime.Changed");
+                }
+            }
+        }
 
-		public DateTime? BecomeInactive
-		{
-			get { return mBecomeInactive; }
-			set
-			{
-				if(mBecomeInactive == null)
-				{
-					mBecomeInactive = value;
-					OnPropertyChanged("EventTimeInfo.BecomeInactive.Changed");
-				}
-				else if(mBecomeInactive.Value != value.Value)
-				{
-					mBecomeInactive = value;
-					OnPropertyChanged("EventTimeInfo.BecomeInactive.Changed");
-				}
-			}
-		}
-		#endregion
+        public DateTime? BecomeActive
+        {
+            get { return mBecomeActive; }
+            set
+            {
+                if (mBecomeActive == null)
+                {
+                    mBecomeActive = value;
+                    OnPropertyChanged("EventTimeInfo.BecomeActive.Changed");
+                }
+                else if (mBecomeActive.Value != value.Value)
+                {
+                    mBecomeActive = value;
+                    OnPropertyChanged("EventTimeInfo.BecomeActive.Changed");
+                }
+            }
+        }
 
-		#region String Conversion Members
+        public DateTime? BecomeInactive
+        {
+            get { return mBecomeInactive; }
+            set
+            {
+                if (mBecomeInactive == null)
+                {
+                    mBecomeInactive = value;
+                    OnPropertyChanged("EventTimeInfo.BecomeInactive.Changed");
+                }
+                else if (mBecomeInactive.Value != value.Value)
+                {
+                    mBecomeInactive = value;
+                    OnPropertyChanged("EventTimeInfo.BecomeInactive.Changed");
+                }
+            }
+        }
+        #endregion
 
-		public override string ToString()
-		{
-			if (IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
-			else
-			{
-				string retStr = UniqueID.ToString();
+        #region String Conversion Members
 
-				if(CreationTime != null)
-					retStr += mDelim + CreationTime.Value.Ticks.ToString();
-				else
-					retStr += mDelim + "0";
+        public override string ToString()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
+            else
+            {
+                string retStr = UniqueID.ToString();
 
-				if(BecomeActive != null)
-					retStr += mDelim + BecomeActive.Value.Ticks.ToString();
-				else
-					retStr += mDelim + "0";
+                if (CreationTime != null)
+                    retStr += mDelim + CreationTime.Value.Ticks.ToString();
+                else
+                    retStr += mDelim + "0";
 
-				if(BecomeInactive != null)
-					retStr += mDelim + BecomeInactive.Value.Ticks.ToString();
-				else
-					retStr += mDelim + "0";
+                if (BecomeActive != null)
+                    retStr += mDelim + BecomeActive.Value.Ticks.ToString();
+                else
+                    retStr += mDelim + "0";
 
-				return retStr;
-			}
-		}
-		
-		public static EventTimeInfo Parse(SqlString sqlStr)
-		{
-			if (sqlStr.IsNull)
-				return null;
-			else
-			{
-				return Parse(Convert.ToString(sqlStr));
-			}
-		}
+                if (BecomeInactive != null)
+                    retStr += mDelim + BecomeInactive.Value.Ticks.ToString();
+                else
+                    retStr += mDelim + "0";
 
-		public static EventTimeInfo Parse(string str)
-		{
-			int strCnt = 0;
+                return retStr;
+            }
+        }
 
-			EventTimeInfo eventTimeInfo = new EventTimeInfo();
-			
-			string[] strSplit = null;
-			strSplit = str.Split(new char[] { ';' });
+        public static EventTimeInfo Parse(SqlString sqlStr)
+        {
+            if (sqlStr.IsNull)
+                return null;
+            else
+            {
+                return Parse(Convert.ToString(sqlStr));
+            }
+        }
 
-			strCnt = Parse(eventTimeInfo, strSplit, strCnt);
+        public static EventTimeInfo Parse(string str)
+        {
+            int strCnt = 0;
 
-			return eventTimeInfo;
-		}
-		
-		public static int Parse(EventTimeInfo eventTimeInfo, string[] strSplit, int strCnt)
-		{
-			eventTimeInfo.UniqueID			= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            EventTimeInfo eventTimeInfo = new EventTimeInfo();
 
-			eventTimeInfo.CreationTime		= new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
-			
-			eventTimeInfo.BecomeActive		= new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
-			
-			eventTimeInfo.BecomeInactive		= new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
+            string[] strSplit = null;
+            strSplit = str.Split(new char[] { ';' });
 
-			return strCnt;
-		}
+            strCnt = Parse(eventTimeInfo, strSplit, strCnt);
 
-		#endregion
+            return eventTimeInfo;
+        }
 
-		#region IComparable Members
+        public static int Parse(EventTimeInfo eventTimeInfo, string[] strSplit, int strCnt)
+        {
+            eventTimeInfo.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		//Override the Equals method        
-		public override bool Equals(object other)
-		{
-			return CompareTo(other) == 0;
-		}
+            eventTimeInfo.CreationTime = new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
 
-		//Override the GetHashCode method
-		public override int GetHashCode()
-		{
-			if(IsNull)// || (!IsLoaded()))
-				return 0;
+            eventTimeInfo.BecomeActive = new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
 
-			return this.ToString().GetHashCode();
-		}
+            eventTimeInfo.BecomeInactive = new DateTime(Convert.ToInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt])); strCnt++;
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Other object is null
-		//		The argument to compare is not a UserBase
-		//		Refering object (this) is null
-		public override int CompareTo(object other)
-		{
-			if (other == null)
-				throw new System.ArgumentException("Other object is null", "other");
+            return strCnt;
+        }
 
-			EventTimeInfo eventTimeInfo = other as EventTimeInfo;
+        #endregion
 
-			if (eventTimeInfo == null)
-				throw new System.ArgumentException("The argument to compare is not a eventTimeInfo", "other");
+        #region IComparable Members
 
-			if(IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("Refering object (this) is null", "this");
+        //Override the Equals method        
+        public override bool Equals(object other)
+        {
+            return CompareTo(other) == 0;
+        }
 
-			return this.ToString().CompareTo(eventTimeInfo.ToString());
-		}
+        //Override the GetHashCode method
+        public override int GetHashCode()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                return 0;
 
-		#endregion
+            return this.ToString().GetHashCode();
+        }
 
-		#region INotifyPropertyChanged Members
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Other object is null
+        //		The argument to compare is not a UserBase
+        //		Refering object (this) is null
+        public override int CompareTo(object other)
+        {
+            if (other == null)
+                throw new System.ArgumentException("Other object is null", "other");
 
-		public event PropertyChangedEventHandler PropertyChanged;
+            EventTimeInfo eventTimeInfo = other as EventTimeInfo;
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if (handler != null)
-				handler(this, new PropertyChangedEventArgs(propertyName));
-		}
+            if (eventTimeInfo == null)
+                throw new System.ArgumentException("The argument to compare is not a eventTimeInfo", "other");
 
-		#endregion
-	}
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("Refering object (this) is null", "this");
+
+            return this.ToString().CompareTo(eventTimeInfo.ToString());
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

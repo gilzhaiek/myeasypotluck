@@ -12,21 +12,21 @@ using MyEasyBO.Object;
 
 namespace MyEasyBO.ResourceBO
 {
-	public class ResourceBaseBO
-	{
-		#region Function
+    public class ResourceBaseBO
+    {
+        #region Function
 
-		public void ClearValues(ResourceBase resourceBase)
-		{
-			//resourceBase.UniqueID = 0;
-			resourceBase.Admin					= new UserBase(); 
-			resourceBase.ResourceDescription	= new ResourceDescription();
-			resourceBase.ResourcePriority		= MyEasySettings.DefaultResourcePriority;
-			resourceBase.HoldingsInfo.Clear();
-			resourceBase.Scalable				= false;
-			resourceBase.CurrentUserHoldingPermissions = EHoldingPermissions.eHoldingPermissionsNull;
-		}
+        public void ClearValues(ResourceBase resourceBase)
+        {
+            //resourceBase.UniqueID = 0;
+            resourceBase.Admin = new UserBase();
+            resourceBase.ResourceDescription = new ResourceDescription();
+            resourceBase.ResourcePriority = MyEasySettings.DefaultResourcePriority;
+            resourceBase.HoldingsInfo.Clear();
+            resourceBase.Scalable = false;
+            resourceBase.CurrentUserHoldingPermissions = EHoldingPermissions.eHoldingPermissionsNull;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

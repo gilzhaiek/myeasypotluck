@@ -6,12 +6,12 @@ using MyEasyObjects.Resource;
 
 namespace MyEasyIDAL.Resource
 {
-	public interface ResourceDescriptionIDAL
-	{
-		void Load(ResourceDescription resourceDescription, UInt64 uniqueID);
+    public interface ResourceDescriptionIDAL
+    {
+        void Load(ResourceDescription resourceDescription, UInt64 uniqueID);
 
-		bool IsLatest(ResourceDescription resourceDescription);
+        bool IsLatest(ResourceDescription resourceDescription);
 
-		void Save(ResourceDescription resourceDescription);
-	}
+        void Save(ResourceDescription resourceDescription);
+    }
 }

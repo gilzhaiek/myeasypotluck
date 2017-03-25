@@ -12,47 +12,47 @@ using System.Data;
 
 namespace MyEasyDAL.Event
 {
-	public class EventTimeInfoDAL : MyObjectBaseDAL, EventTimeInfoIDAL
-	{
-		public bool IsLatest(EventTimeInfo eventTimeInfo)
-		{
-			EventTimeInfo upToDateEventTimeInfo = new EventTimeInfo();
+    public class EventTimeInfoDAL : MyObjectBaseDAL, EventTimeInfoIDAL
+    {
+        public bool IsLatest(EventTimeInfo eventTimeInfo)
+        {
+            EventTimeInfo upToDateEventTimeInfo = new EventTimeInfo();
 
-			Load(upToDateEventTimeInfo, eventTimeInfo.UniqueID);
+            Load(upToDateEventTimeInfo, eventTimeInfo.UniqueID);
 
-			return (upToDateEventTimeInfo.LastDALChange == eventTimeInfo.LastDALChange);
-		}
+            return (upToDateEventTimeInfo.LastDALChange == eventTimeInfo.LastDALChange);
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		eventTimeInfo is null when saving EventTimeInfo
-		public void	Save(EventTimeInfo eventTimeInfo)
-		{
-			if(eventTimeInfo.IsNull)
-			{
-				throw new System.ArgumentException("eventTimeInfo is null when saving EventTimeInfo", "eventTimeInfo");
-			}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		eventTimeInfo is null when saving EventTimeInfo
+        public void Save(EventTimeInfo eventTimeInfo)
+        {
+            if (eventTimeInfo.IsNull)
+            {
+                throw new System.ArgumentException("eventTimeInfo is null when saving EventTimeInfo", "eventTimeInfo");
+            }
 
-			if(EventTimeInfoExists(eventTimeInfo.UniqueID))
-			{
-				EventTimeInfo upToDateItemBase = new EventTimeInfo();
+            if (EventTimeInfoExists(eventTimeInfo.UniqueID))
+            {
+                EventTimeInfo upToDateItemBase = new EventTimeInfo();
 
-				try
-				{
-					Load(upToDateItemBase, eventTimeInfo.UniqueID);
-				}
-				catch
-				{
-					SaveInternal(eventTimeInfo);
-					return;
-				}
+                try
+                {
+                    Load(upToDateItemBase, eventTimeInfo.UniqueID);
+                }
+                catch
+                {
+                    SaveInternal(eventTimeInfo);
+                    return;
+                }
 
-				if(eventTimeInfo.CompareTo(upToDateItemBase) != 0)
-					UpdateInternal(eventTimeInfo);
-			}
-			else
-				SaveInternal(eventTimeInfo);
-		}
+                if (eventTimeInfo.CompareTo(upToDateItemBase) != 0)
+                    UpdateInternal(eventTimeInfo);
+            }
+            else
+                SaveInternal(eventTimeInfo);
+        }
 
         public void Delete(EventTimeInfo eventTimeInfo)
         {
@@ -69,10 +69,10 @@ namespace MyEasyDAL.Event
                 throw new System.ArgumentException("eventTimeInfo does not exists while removing EventTimeInfo", "eventTimeInfo");
         }
 
-		public bool EventTimeInfoExists(UInt64 uniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public bool EventTimeInfoExists(UInt64 uniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
             try
             {
@@ -97,7 +97,7 @@ namespace MyEasyDAL.Event
                 sqlReader.Close();
                 mSqlConnection.Close();
             }
-		}
+        }
 
         protected void DeleteInternal(EventTimeInfo eventTimeInfo)
         {
@@ -127,48 +127,48 @@ namespace MyEasyDAL.Event
             }
         }
 
-		public void Load(EventTimeInfo eventTimeInfo, UInt64 eventUniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public void Load(EventTimeInfo eventTimeInfo, UInt64 eventUniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select * from EventTimeInfo where EventUniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = eventUniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select * from EventTimeInfo where EventUniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = eventUniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				if(!sqlReader.Read())
-				{
-					throw new System.ArgumentException("eventTimeInfo with EventUniqueID=" + eventUniqueID.ToString() + " was not found", "eventUniqueID");
-				}
-				
-				eventTimeInfo.EventUniqueID			= eventUniqueID;
-				eventTimeInfo.LastDALChange			= Convert.ToInt64(sqlReader["LastDALChange"].ToString());
-				eventTimeInfo.CreationTime			= new DateTime(Convert.ToInt64(sqlReader["CreationTime"].ToString()));
-				eventTimeInfo.BecomeActive			= new DateTime(Convert.ToInt64(sqlReader["BecomeActive"].ToString()));
-				eventTimeInfo.BecomeInactive		= new DateTime(Convert.ToInt64(sqlReader["BecomeInactive"].ToString()));
+                sqlReader = sqlCommand.ExecuteReader();
+                if (!sqlReader.Read())
+                {
+                    throw new System.ArgumentException("eventTimeInfo with EventUniqueID=" + eventUniqueID.ToString() + " was not found", "eventUniqueID");
+                }
 
-				if(sqlReader.Read())
-				{
-					throw new ArgumentException("Multiple EventUniqueID=" + eventUniqueID.ToString() + " were found in EventTimeInfo", "eventUniqueID");
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-			finally
-			{
-				sqlReader.Close();
+                eventTimeInfo.EventUniqueID = eventUniqueID;
+                eventTimeInfo.LastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
+                eventTimeInfo.CreationTime = new DateTime(Convert.ToInt64(sqlReader["CreationTime"].ToString()));
+                eventTimeInfo.BecomeActive = new DateTime(Convert.ToInt64(sqlReader["BecomeActive"].ToString()));
+                eventTimeInfo.BecomeInactive = new DateTime(Convert.ToInt64(sqlReader["BecomeInactive"].ToString()));
+
+                if (sqlReader.Read())
+                {
+                    throw new ArgumentException("Multiple EventUniqueID=" + eventUniqueID.ToString() + " were found in EventTimeInfo", "eventUniqueID");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                sqlReader.Close();
                 mSqlConnection.Close();
-			}
-		}
+            }
+        }
 
-		protected void UpdateInternal(EventTimeInfo eventTimeInfo)
-		{
+        protected void UpdateInternal(EventTimeInfo eventTimeInfo)
+        {
             try
             {
                 eventTimeInfo.LastDALChange = DateTime.Now.Ticks;
@@ -197,10 +197,10 @@ namespace MyEasyDAL.Event
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		protected void SaveInternal(EventTimeInfo eventTimeInfo)
-		{
+        protected void SaveInternal(EventTimeInfo eventTimeInfo)
+        {
             try
             {
                 eventTimeInfo.LastDALChange = DateTime.Now.Ticks;
@@ -232,6 +232,6 @@ namespace MyEasyDAL.Event
             {
                 mSqlConnection.Close();
             }
-		}
-	}
+        }
+    }
 }

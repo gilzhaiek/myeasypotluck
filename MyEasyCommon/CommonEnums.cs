@@ -5,39 +5,39 @@ using System.Text;
 
 namespace MyEasy.Common
 {
-	public enum ETitle
-	{
-		eMr,
-		eMrs,
-		eMs,
-		eDr,
-		eProf,
-		eTitleNull
-	};
+    public enum ETitle
+    {
+        eMr,
+        eMrs,
+        eMs,
+        eDr,
+        eProf,
+        eTitleNull
+    };
 
     public enum EGender
     {
-		eGenderNull,
-		[StringValue("Male")]		eMale,
-		[StringValue("Female")]		eFemale,
-		eGenderSize 
+        eGenderNull,
+        [StringValue("Male")] eMale,
+        [StringValue("Female")] eFemale,
+        eGenderSize
     };
 
-	public enum EResourceType
-	{
-		eEvent,
-		eObject,
-		eResourceTypeNull
-	}
+    public enum EResourceType
+    {
+        eEvent,
+        eObject,
+        eResourceTypeNull
+    }
 
-	public enum EResourcePriority
-	{
-		eLow		= 2,
-		eNormal		= 7,
-		eHigh		= 12,
-		eHighest	= 15,
-		eResourcePriorityNull
-	}
+    public enum EResourcePriority
+    {
+        eLow = 2,
+        eNormal = 7,
+        eHigh = 12,
+        eHighest = 15,
+        eResourcePriorityNull
+    }
 
     public enum EPrivacyType
     {
@@ -47,28 +47,28 @@ namespace MyEasy.Common
         ePrivacyTypeNull
     }
 
-	public enum EHoldingPermissions
-	{
-		eParticipator	= 1 << 0,	// Can Hold Items
-		eViewer			= 1	<< 1,	// Only Views Items
-		eModifier		= 1	<< 2,	// Modifies the Items/Events
-		eController		= 1	<< 3,	// Admin
-		eHoldingPermissionsNull = 1 << 31
-	}
+    public enum EHoldingPermissions
+    {
+        eParticipator = 1 << 0, // Can Hold Items
+        eViewer = 1 << 1,   // Only Views Items
+        eModifier = 1 << 2, // Modifies the Items/Events
+        eController = 1 << 3,   // Admin
+        eHoldingPermissionsNull = 1 << 31
+    }
 
-	public enum EHoldingApprovel
-	{
-		eNotApprovedYet,
-		eApproved,
-		eNotApproved,
-		eHoldingApprovelNull
-	}
+    public enum EHoldingApprovel
+    {
+        eNotApprovedYet,
+        eApproved,
+        eNotApproved,
+        eHoldingApprovelNull
+    }
 
-	public enum EInvitationStatus
-	{
-		eInvitationPending,
-		eInvitationAccepted,
-		eInvitationRejected,
-		eInvitationNull
-	}
+    public enum EInvitationStatus
+    {
+        eInvitationPending,
+        eInvitationAccepted,
+        eInvitationRejected,
+        eInvitationNull
+    }
 }

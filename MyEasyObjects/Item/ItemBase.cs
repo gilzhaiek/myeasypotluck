@@ -11,127 +11,127 @@ using MyEasyObjects.Event;
 
 namespace MyEasyObjects.Item
 {
-	public class ItemBase : ResourceBase
+    public class ItemBase : ResourceBase
     {
         #region Members
 
-		EventBase			mEventParent	= null;
+        EventBase mEventParent = null;
 
-		ItemBase			mItemParent		= null; 
+        ItemBase mItemParent = null;
 
-		List<ItemBase>		mItemChildren	= new List<ItemBase>();	
-        
-        #endregion 
-
-        #region Constructor
-
-		public ItemBase() :
-			base(
-				0,
-				new UserBase(),
-				new ResourceDescription())
-		{
-            MaxHoldings = 1;  // Default max holdings for Admin
-		}
-
-		public ItemBase(UInt64 uniqueID) :
-			base(
-				uniqueID,
-				new UserBase(),
-				new ResourceDescription(uniqueID))
-		{
-			mEventParent = new EventBase();
-        }
-
-		public ItemBase(UInt64 uniqueID, EventBase eventParent) :
-			base(
-				uniqueID,
-				new UserBase(),
-				new ResourceDescription(uniqueID))
-		{
-			mEventParent = eventParent;
-        }
-
-		public ItemBase(UInt64 uniqueID, EventBase eventParent, UserBase adminUser) :
-			base(
-				uniqueID,
-				adminUser,
-				new ResourceDescription(uniqueID))
-		{
-			mEventParent = eventParent;
-        }
-
-        public ItemBase(UInt64 uniqueID, EventBase eventParent, UserBase adminUser, NameImage nameImage) :
-			base(
-				uniqueID,
-				adminUser,
-				new ResourceDescription(uniqueID),
-                nameImage,
-                new NameImage())
-		{
-			mEventParent = eventParent;
-		}
+        List<ItemBase> mItemChildren = new List<ItemBase>();
 
         #endregion
 
-		#region properties
-		public override UInt64 UniqueID
-		{
-			get { return mUniqueID; }
-			set
-			{
-				if (mUniqueID != value)
-				{
-					mUniqueID							= value;
-					mResourceDescription.OwnerUniqueID	= value;
-					OnPropertyChanged("ItemBase.UniqueID.Changed");
-				}
-			}
-		}
-		
-		public EventBase EventParent
-		{
-			get { return mEventParent; }
-			set 
-			{
-				if(mEventParent != value)
-				{
-					mEventParent = value;
-					EventParentChanged();
-				}
-			}
-		}
+        #region Constructor
 
-		public ItemBase ItemParent
-		{
-			get
-			{
-				if(mItemParent == null)
-				{
-					mItemParent = new ItemBase();
-				}
-				
-				return mItemParent;
-			}
-			set 
-			{
-				if(mItemParent != value)
-				{
-					mItemParent = value;
-					ItemParentChanged();
-				}
-			}
-		}
+        public ItemBase() :
+            base(
+                0,
+                new UserBase(),
+                new ResourceDescription())
+        {
+            MaxHoldings = 1;  // Default max holdings for Admin
+        }
 
-		public List<ItemBase> ItemChildren
-		{
-			get { return mItemChildren; }
-		}
+        public ItemBase(UInt64 uniqueID) :
+            base(
+                uniqueID,
+                new UserBase(),
+                new ResourceDescription(uniqueID))
+        {
+            mEventParent = new EventBase();
+        }
+
+        public ItemBase(UInt64 uniqueID, EventBase eventParent) :
+            base(
+                uniqueID,
+                new UserBase(),
+                new ResourceDescription(uniqueID))
+        {
+            mEventParent = eventParent;
+        }
+
+        public ItemBase(UInt64 uniqueID, EventBase eventParent, UserBase adminUser) :
+            base(
+                uniqueID,
+                adminUser,
+                new ResourceDescription(uniqueID))
+        {
+            mEventParent = eventParent;
+        }
+
+        public ItemBase(UInt64 uniqueID, EventBase eventParent, UserBase adminUser, NameImage nameImage) :
+            base(
+                uniqueID,
+                adminUser,
+                new ResourceDescription(uniqueID),
+                nameImage,
+                new NameImage())
+        {
+            mEventParent = eventParent;
+        }
+
+        #endregion
+
+        #region properties
+        public override UInt64 UniqueID
+        {
+            get { return mUniqueID; }
+            set
+            {
+                if (mUniqueID != value)
+                {
+                    mUniqueID = value;
+                    mResourceDescription.OwnerUniqueID = value;
+                    OnPropertyChanged("ItemBase.UniqueID.Changed");
+                }
+            }
+        }
+
+        public EventBase EventParent
+        {
+            get { return mEventParent; }
+            set
+            {
+                if (mEventParent != value)
+                {
+                    mEventParent = value;
+                    EventParentChanged();
+                }
+            }
+        }
+
+        public ItemBase ItemParent
+        {
+            get
+            {
+                if (mItemParent == null)
+                {
+                    mItemParent = new ItemBase();
+                }
+
+                return mItemParent;
+            }
+            set
+            {
+                if (mItemParent != value)
+                {
+                    mItemParent = value;
+                    ItemParentChanged();
+                }
+            }
+        }
+
+        public List<ItemBase> ItemChildren
+        {
+            get { return mItemChildren; }
+        }
 
         public string Name
         {
             get { return ThumbName; }
-            set { ThumbName = value;}
+            set { ThumbName = value; }
         }
 
         public string ImageLocation
@@ -145,125 +145,125 @@ namespace MyEasyObjects.Item
             get { return ThumbNameImage; }
             set { ThumbNameImage = value; }
         }
-        
+
         #endregion
 
-		#region String Conversion Members
+        #region String Conversion Members
 
-		public override string ToString()
-		{
-			if (IsNull)
-				throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
-			else
-			{
-				string retStr = base.ToString();
+        public override string ToString()
+        {
+            if (IsNull)
+                throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
+            else
+            {
+                string retStr = base.ToString();
 
-				if(EventParent == null)
-					retStr += mDelim + "0";
-				else
-					retStr += mDelim + EventParent.UniqueID.ToString();
+                if (EventParent == null)
+                    retStr += mDelim + "0";
+                else
+                    retStr += mDelim + EventParent.UniqueID.ToString();
 
-				if(ItemParent == null)
-					retStr += mDelim + "0";
-				else
-					retStr += mDelim + ItemParent.UniqueID.ToString();
+                if (ItemParent == null)
+                    retStr += mDelim + "0";
+                else
+                    retStr += mDelim + ItemParent.UniqueID.ToString();
 
-				retStr += mDelim + ItemChildren.Count.ToString();
-				for(int i = 0; i < ItemChildren.Count; i++)
-					retStr += mDelim + ItemChildren[i].UniqueID.ToString();
-        
-				return retStr;
-			}
-		}
+                retStr += mDelim + ItemChildren.Count.ToString();
+                for (int i = 0; i < ItemChildren.Count; i++)
+                    retStr += mDelim + ItemChildren[i].UniqueID.ToString();
 
-		public static ItemBase Parse(string str)
-		{
-			int strCnt = 0;
+                return retStr;
+            }
+        }
 
-			ItemBase itemBase = new ItemBase();
+        public static ItemBase Parse(string str)
+        {
+            int strCnt = 0;
 
-			string[] strSplit = null;
-			strSplit = str.Split(new char[] { ';' });
+            ItemBase itemBase = new ItemBase();
 
-			strCnt = ResourceBaseParse((ResourceBase)itemBase, strSplit, strCnt);
+            string[] strSplit = null;
+            strSplit = str.Split(new char[] { ';' });
 
-			strCnt = Parse(itemBase, strSplit, strCnt);
+            strCnt = ResourceBaseParse((ResourceBase)itemBase, strSplit, strCnt);
 
-			return itemBase;
-		}
-		
-		public static int Parse(ItemBase itemBase, string[] strSplit, int strCnt)
-		{
-			int count = 0;
+            strCnt = Parse(itemBase, strSplit, strCnt);
 
-			UInt64 eventParentUniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			if(eventParentUniqueID != 0)
-				itemBase.EventParent = new EventBase(eventParentUniqueID);
+            return itemBase;
+        }
 
-			UInt64 itemParentUniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			if(itemParentUniqueID != 0)
-				itemBase.ItemParent = new ItemBase(itemParentUniqueID);
+        public static int Parse(ItemBase itemBase, string[] strSplit, int strCnt)
+        {
+            int count = 0;
 
-			count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			for(int i = 0; i < count; i++)
-			{
-				if(strSplit[strCnt] == null)
-					break;
-				itemBase.ItemChildren.Add(new ItemBase(Convert.ToUInt64(strSplit[strCnt]))); strCnt++;
-			}
+            UInt64 eventParentUniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            if (eventParentUniqueID != 0)
+                itemBase.EventParent = new EventBase(eventParentUniqueID);
 
-			return strCnt;
-		}
+            UInt64 itemParentUniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            if (itemParentUniqueID != 0)
+                itemBase.ItemParent = new ItemBase(itemParentUniqueID);
 
-		#endregion
+            count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            for (int i = 0; i < count; i++)
+            {
+                if (strSplit[strCnt] == null)
+                    break;
+                itemBase.ItemChildren.Add(new ItemBase(Convert.ToUInt64(strSplit[strCnt]))); strCnt++;
+            }
 
-		
-		#region IComparable Members
+            return strCnt;
+        }
 
-		//Override the Equals method        
-		public override bool Equals(object other)
-		{
-			return CompareTo(other) == 0;
-		}
+        #endregion
 
-		//Override the GetHashCode method
-		public override int GetHashCode()
-		{
-			if(IsNull)// || (!IsLoaded()))
-				return 0;
 
-			return this.ToString().GetHashCode();
-		}
+        #region IComparable Members
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Other object is null
-		//		The argument to compare is not a ItemBase
-		//		Refering object (this) is null
-		public override int CompareTo(object other)
-		{
-			if (other == null)
-				throw new System.ArgumentException("Other object is null", "other");
+        //Override the Equals method        
+        public override bool Equals(object other)
+        {
+            return CompareTo(other) == 0;
+        }
 
-			ItemBase itemBase = other as ItemBase;
+        //Override the GetHashCode method
+        public override int GetHashCode()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                return 0;
 
-			if (itemBase == null)
-				throw new System.ArgumentException("The argument to compare is not an ItemBase", "other");
+            return this.ToString().GetHashCode();
+        }
 
-			if(IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("Refering object (this) is null", "this");
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Other object is null
+        //		The argument to compare is not a ItemBase
+        //		Refering object (this) is null
+        public override int CompareTo(object other)
+        {
+            if (other == null)
+                throw new System.ArgumentException("Other object is null", "other");
 
-			return this.ToString().CompareTo(itemBase.ToString());
-		}
+            ItemBase itemBase = other as ItemBase;
 
-		#endregion
+            if (itemBase == null)
+                throw new System.ArgumentException("The argument to compare is not an ItemBase", "other");
 
-		#region INotifyPropertyChanged Members
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("Refering object (this) is null", "this");
 
-		private void EventParentChanged()		{ OnPropertyChanged("ItemBase.EventParent.Changed"); }
+            return this.ToString().CompareTo(itemBase.ToString());
+        }
 
-		private void ItemParentChanged()		{ OnPropertyChanged("ItemBase.ItemParent.Changed"); }
-		
-	    #endregion
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        private void EventParentChanged() { OnPropertyChanged("ItemBase.EventParent.Changed"); }
+
+        private void ItemParentChanged() { OnPropertyChanged("ItemBase.ItemParent.Changed"); }
+
+        #endregion
     }
 }

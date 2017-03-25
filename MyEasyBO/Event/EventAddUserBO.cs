@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyEasyBO.Event
 {
-	public class EventAddUserBO
-	{
-	}
+    public class EventAddUserBO
+    {
+    }
 }

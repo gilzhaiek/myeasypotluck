@@ -7,8 +7,8 @@ using System.Collections.ObjectModel;
 
 namespace MyEasy.Common
 {
-	class StringValueAttribute : Attribute
-	{
+    class StringValueAttribute : Attribute
+    {
         #region Properties
 
         /// <summary>
@@ -24,7 +24,8 @@ namespace MyEasy.Common
         /// Constructor used to init a StringValue Attribute
         /// </summary>
         /// <param name="value"></param>
-        public StringValueAttribute(string value) {
+        public StringValueAttribute(string value)
+        {
             this.StringValue = value;
         }
 
@@ -32,9 +33,9 @@ namespace MyEasy.Common
 
     }
 
-	public static class StringValueClass
-	{
-		/// <summary>
+    public static class StringValueClass
+    {
+        /// <summary>
         /// Will get the string value for a given enums value, this will
         /// only work if you assign the StringValue attribute to
         /// the items in your enum.
@@ -42,7 +43,7 @@ namespace MyEasy.Common
         /// <param name="value"></param>
         /// <returns></returns>
         public static string GetStringValue(this Enum value)
-		{
+        {
             // Get the type
             Type type = value.GetType();
 
@@ -73,5 +74,5 @@ namespace MyEasy.Common
 
             return attribs.Length > 0 ? attribs[0].StringValue : null;
         }*/
-	}
+    }
 }

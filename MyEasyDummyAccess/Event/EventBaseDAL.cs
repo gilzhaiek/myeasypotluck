@@ -15,78 +15,78 @@ using MyEasyObjects.Object;
 
 namespace MyEasyDAL.Event
 {
-	public class EventBaseDAL : MyObjectBaseDAL, EventBaseIDAL
-	{
-		#region Members
+    public class EventBaseDAL : MyObjectBaseDAL, EventBaseIDAL
+    {
+        #region Members
 
-		ItemBaseDAL		mItemBaseDAL;
+        ItemBaseDAL mItemBaseDAL;
 
-		#endregion
+        #endregion
 
-		public EventBaseDAL()
-		{
-			mItemBaseDAL	= new ItemBaseDAL();
-		}
+        public EventBaseDAL()
+        {
+            mItemBaseDAL = new ItemBaseDAL();
+        }
 
-		public bool IsLatest(EventBase eventBase, bool checkRelations)
-		{
-			EventBase upToDateEventBase = new EventBase();
+        public bool IsLatest(EventBase eventBase, bool checkRelations)
+        {
+            EventBase upToDateEventBase = new EventBase();
 
-			Load(upToDateEventBase, eventBase.UniqueID);
+            Load(upToDateEventBase, eventBase.UniqueID);
 
-			if(upToDateEventBase.LastDALChange != eventBase.LastDALChange)
-				return false;
-			
-			if(checkRelations)
-			{
-				foreach(EventBase eventChild in eventBase.EventChildren)
-				{
-					if(!IsLatest(eventChild, false))
-						return false;
-				}
+            if (upToDateEventBase.LastDALChange != eventBase.LastDALChange)
+                return false;
 
-				foreach(ItemBase itemChild in eventBase.ItemChildren)
-				{
-					if(!mItemBaseDAL.IsLatest(itemChild, false))
-						return false;
-				}
-			}
+            if (checkRelations)
+            {
+                foreach (EventBase eventChild in eventBase.EventChildren)
+                {
+                    if (!IsLatest(eventChild, false))
+                        return false;
+                }
 
-			return true;
-		}
+                foreach (ItemBase itemChild in eventBase.ItemChildren)
+                {
+                    if (!mItemBaseDAL.IsLatest(itemChild, false))
+                        return false;
+                }
+            }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		eventBase is null when saving EventBase
-		public void	Save(EventBase eventBase)
-		{
-			if(eventBase.IsNull)
-			{
-				SaveInternal(eventBase);
-				return;
-				//throw new System.ArgumentException("eventBase is null when saving EventBase", "eventBase");
-			}
+            return true;
+        }
 
-			if(EventBaseExists(eventBase.UniqueID))
-			{
-				EventBase upToDateEventBase = new EventBase();
+        // Exceptions:
+        //	System.ArgumentException:
+        //		eventBase is null when saving EventBase
+        public void Save(EventBase eventBase)
+        {
+            if (eventBase.IsNull)
+            {
+                SaveInternal(eventBase);
+                return;
+                //throw new System.ArgumentException("eventBase is null when saving EventBase", "eventBase");
+            }
 
-				try
-				{
-					Load(upToDateEventBase, eventBase.UniqueID);
-				}
-				catch
-				{
-					SaveInternal(eventBase);
-					return;
-				}
+            if (EventBaseExists(eventBase.UniqueID))
+            {
+                EventBase upToDateEventBase = new EventBase();
 
-				if(eventBase.CompareTo(upToDateEventBase) != 0)
-					UpdateInternal(eventBase);
-			}
-			else
-				SaveInternal(eventBase);
-		}
+                try
+                {
+                    Load(upToDateEventBase, eventBase.UniqueID);
+                }
+                catch
+                {
+                    SaveInternal(eventBase);
+                    return;
+                }
+
+                if (eventBase.CompareTo(upToDateEventBase) != 0)
+                    UpdateInternal(eventBase);
+            }
+            else
+                SaveInternal(eventBase);
+        }
 
         public void Delete(EventBase eventBase)
         {
@@ -104,101 +104,101 @@ namespace MyEasyDAL.Event
         }
 
 
-		public bool EventBaseExists(UInt64 uniqueID)
-		{
+        public bool EventBaseExists(UInt64 uniqueID)
+        {
             return ObjectBaseExists(uniqueID, "EventBase", "UniqueID");
-		}
+        }
 
-		public void Load(EventBase eventBase, UInt64 uniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public void Load(EventBase eventBase, UInt64 uniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select * from EventBase where UniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = uniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select * from EventBase where UniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = uniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				if(!sqlReader.Read())
-				{
-					throw new System.ArgumentException("eventBase with uniqueID=" + uniqueID.ToString() + " was not found", "uniqueID");
-				}
-				
-				eventBase.UniqueID				= uniqueID;
-				eventBase.LastDALChange			= Convert.ToInt64(sqlReader["LastDALChange"].ToString());
-				eventBase.Admin					= new UserBase(Convert.ToUInt64(sqlReader["AdminUniqueID"].ToString()));
-				eventBase.ResourcePriority		= (EResourcePriority)Enum.Parse(typeof(EResourcePriority), sqlReader["ResourcePriority"].ToString());
-				eventBase.Scalable				= Convert.ToBoolean(sqlReader["Scalable"].ToString());
-				eventBase.EventParent			= new EventBase(Convert.ToUInt64(sqlReader["EventParentUniqueID"].ToString()));
-				eventBase.EventLocation			= new ObjectLocation(Convert.ToUInt64(sqlReader["EventLocationUniqueID"].ToString()));
-				eventBase.Value					= Convert.ToInt32(sqlReader["Value"].ToString());
-				eventBase.IsPublic				= Convert.ToBoolean(sqlReader["IsPublic"].ToString());
-                eventBase.PrivacyType           = (EPrivacyType)Enum.Parse(typeof(EPrivacyType), sqlReader["PrivacyType"].ToString());
-                eventBase.FullImageLocation     = sqlReader["FullImageLocation"].ToString();
-                eventBase.ThumbImageLocation    = sqlReader["ThumbImageLocation"].ToString();
-                eventBase.MaxHoldings           = Convert.ToInt32(sqlReader["MaxHoldings"].ToString());
+                sqlReader = sqlCommand.ExecuteReader();
+                if (!sqlReader.Read())
+                {
+                    throw new System.ArgumentException("eventBase with uniqueID=" + uniqueID.ToString() + " was not found", "uniqueID");
+                }
 
-				if(sqlReader.Read())
-				{
-					throw new ArgumentException("Multiple UniqueID=" + uniqueID.ToString() + " were found in EventBase", "uniqueID");
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-			finally
-			{
-				sqlReader.Close();
+                eventBase.UniqueID = uniqueID;
+                eventBase.LastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
+                eventBase.Admin = new UserBase(Convert.ToUInt64(sqlReader["AdminUniqueID"].ToString()));
+                eventBase.ResourcePriority = (EResourcePriority)Enum.Parse(typeof(EResourcePriority), sqlReader["ResourcePriority"].ToString());
+                eventBase.Scalable = Convert.ToBoolean(sqlReader["Scalable"].ToString());
+                eventBase.EventParent = new EventBase(Convert.ToUInt64(sqlReader["EventParentUniqueID"].ToString()));
+                eventBase.EventLocation = new ObjectLocation(Convert.ToUInt64(sqlReader["EventLocationUniqueID"].ToString()));
+                eventBase.Value = Convert.ToInt32(sqlReader["Value"].ToString());
+                eventBase.IsPublic = Convert.ToBoolean(sqlReader["IsPublic"].ToString());
+                eventBase.PrivacyType = (EPrivacyType)Enum.Parse(typeof(EPrivacyType), sqlReader["PrivacyType"].ToString());
+                eventBase.FullImageLocation = sqlReader["FullImageLocation"].ToString();
+                eventBase.ThumbImageLocation = sqlReader["ThumbImageLocation"].ToString();
+                eventBase.MaxHoldings = Convert.ToInt32(sqlReader["MaxHoldings"].ToString());
+
+                if (sqlReader.Read())
+                {
+                    throw new ArgumentException("Multiple UniqueID=" + uniqueID.ToString() + " were found in EventBase", "uniqueID");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                sqlReader.Close();
                 mSqlConnection.Close();
-			}
-		}
+            }
+        }
 
-		protected void UpdateInternal(EventBase eventBase)
-		{
-			try
-			{
-				eventBase.LastDALChange = DateTime.Now.Ticks;
+        protected void UpdateInternal(EventBase eventBase)
+        {
+            try
+            {
+                eventBase.LastDALChange = DateTime.Now.Ticks;
 
-				SqlCommand sqlCommand = new SqlCommand("Update EventBase set " +
-					"LastDALChange='"			+ eventBase.LastDALChange.ToString()			+ "'," + 
-					"AdminUniqueID='"			+ eventBase.Admin.UniqueID.ToString()			+ "'," + 
-					"ResourcePriority='"		+ eventBase.ResourcePriority.ToString()			+ "'," + 
-					"Scalable='"				+ eventBase.Scalable.ToString()					+ "'," + 
-					"EventParentUniqueID='"		+ eventBase.EventParent.UniqueID.ToString()		+ "'," + 
-					"EventLocationUniqueID='"	+ eventBase.EventLocation.UniqueID.ToString()	+ "'," + 
-					"Value='"					+ eventBase.Value.ToString()					+ "'," +
-                    "IsPublic='"                + eventBase.IsPublic.ToString()                 + "'," +
-                    "PrivacyType='"             + eventBase.PrivacyType.ToString()              + "'," +
-                    "FullImageLocation='"       + eventBase.FullImageLocation                   + "'," +
-                    "ThumbImageLocation='"      + eventBase.ThumbImageLocation                  + "'," +
-                    "MaxHoldings='"             + eventBase.MaxHoldings.ToString()              + "' " +
-					"Where UniqueID='"			+ eventBase.UniqueID.ToString()                 + "'");
+                SqlCommand sqlCommand = new SqlCommand("Update EventBase set " +
+                    "LastDALChange='" + eventBase.LastDALChange.ToString() + "'," +
+                    "AdminUniqueID='" + eventBase.Admin.UniqueID.ToString() + "'," +
+                    "ResourcePriority='" + eventBase.ResourcePriority.ToString() + "'," +
+                    "Scalable='" + eventBase.Scalable.ToString() + "'," +
+                    "EventParentUniqueID='" + eventBase.EventParent.UniqueID.ToString() + "'," +
+                    "EventLocationUniqueID='" + eventBase.EventLocation.UniqueID.ToString() + "'," +
+                    "Value='" + eventBase.Value.ToString() + "'," +
+                    "IsPublic='" + eventBase.IsPublic.ToString() + "'," +
+                    "PrivacyType='" + eventBase.PrivacyType.ToString() + "'," +
+                    "FullImageLocation='" + eventBase.FullImageLocation + "'," +
+                    "ThumbImageLocation='" + eventBase.ThumbImageLocation + "'," +
+                    "MaxHoldings='" + eventBase.MaxHoldings.ToString() + "' " +
+                    "Where UniqueID='" + eventBase.UniqueID.ToString() + "'");
 
-				sqlCommand.Connection = mSqlConnection;
-				
-				int lineInserted = sqlCommand.ExecuteNonQuery();
+                sqlCommand.Connection = mSqlConnection;
 
-				if(lineInserted != 1)
-				{
-					throw new System.ArgumentException("Update Into EventBase Where UniqueID=" + eventBase.UniqueID.ToString() + " failed", "UniqueID");
-				}			
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
+                int lineInserted = sqlCommand.ExecuteNonQuery();
+
+                if (lineInserted != 1)
+                {
+                    throw new System.ArgumentException("Update Into EventBase Where UniqueID=" + eventBase.UniqueID.ToString() + " failed", "UniqueID");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
             finally
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		protected void SaveInternal(EventBase eventBase)
-		{
+        protected void SaveInternal(EventBase eventBase)
+        {
             try
             {
                 eventBase.LastDALChange = DateTime.Now.Ticks;
@@ -231,7 +231,7 @@ namespace MyEasyDAL.Event
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
         protected void DeleteInternal(EventBase eventBase)
         {
@@ -261,72 +261,72 @@ namespace MyEasyDAL.Event
             }
         }
 
-		public List<UInt64> GetEventsUniqueIDByAdminUniqueID(UInt64 adminUniqueID)
-		{
-			List<UInt64> uniqueIDList = new List<UInt64>();
+        public List<UInt64> GetEventsUniqueIDByAdminUniqueID(UInt64 adminUniqueID)
+        {
+            List<UInt64> uniqueIDList = new List<UInt64>();
 
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select UniqueID from EventBase where AdminUniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = adminUniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select UniqueID from EventBase where AdminUniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = adminUniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				while(sqlReader.Read())
-				{
-					uniqueIDList.Add(Convert.ToUInt64(sqlReader["UniqueID"].ToString()));
-				}
-				
-				sqlReader.Close();
-				return uniqueIDList;
-			}
-			catch (Exception exception)
-			{
-				sqlReader.Close();
-				throw exception;
-			}
+                sqlReader = sqlCommand.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    uniqueIDList.Add(Convert.ToUInt64(sqlReader["UniqueID"].ToString()));
+                }
+
+                sqlReader.Close();
+                return uniqueIDList;
+            }
+            catch (Exception exception)
+            {
+                sqlReader.Close();
+                throw exception;
+            }
             finally
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		public List<UInt64> GetChildrenUniqueIDs(UInt64 eventParentUniqueID)
-		{
-			List<UInt64> uniqueIDList = new List<UInt64>();
+        public List<UInt64> GetChildrenUniqueIDs(UInt64 eventParentUniqueID)
+        {
+            List<UInt64> uniqueIDList = new List<UInt64>();
 
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select UniqueID from EventBase where EventParentUniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = eventParentUniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select UniqueID from EventBase where EventParentUniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = eventParentUniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				while(sqlReader.Read())
-				{
-					uniqueIDList.Add(Convert.ToUInt64(sqlReader["UniqueID"].ToString()));
-				}
-				
-				sqlReader.Close();
-				return uniqueIDList;
-			}
-			catch (Exception exception)
-			{
-				sqlReader.Close();
-				throw exception;
-			}
+                sqlReader = sqlCommand.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    uniqueIDList.Add(Convert.ToUInt64(sqlReader["UniqueID"].ToString()));
+                }
+
+                sqlReader.Close();
+                return uniqueIDList;
+            }
+            catch (Exception exception)
+            {
+                sqlReader.Close();
+                throw exception;
+            }
             finally
             {
                 mSqlConnection.Close();
             }
-		}
-	}
+        }
+    }
 }

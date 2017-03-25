@@ -11,143 +11,143 @@ using System.Data;
 
 namespace MyEasyDAL.Object
 {
-	public class UserNameImageListDAL  :  MyObjectBaseDAL, UserNameImageListIDAL
-	{
-		public void	Save(UserNameImageList userNameImageList)
-		{
-			if(userNameImageList.IsNull)
-			{
-				throw new System.ArgumentException("userNameImageList is null","userNameImageList");
-			}
-			else
-			{
-				UpdateInternal(userNameImageList);
-			}
-		}
-		
-		public void LoadToImageList(UserNameImageList userNameImageList, UInt64 uniqueID, int index)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+    public class UserNameImageListDAL : MyObjectBaseDAL, UserNameImageListIDAL
+    {
+        public void Save(UserNameImageList userNameImageList)
+        {
+            if (userNameImageList.IsNull)
+            {
+                throw new System.ArgumentException("userNameImageList is null", "userNameImageList");
+            }
+            else
+            {
+                UpdateInternal(userNameImageList);
+            }
+        }
 
-			try
-			{
-				sqlCommand = new SqlCommand("select * from UserNameImages where UserUniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = uniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+        public void LoadToImageList(UserNameImageList userNameImageList, UInt64 uniqueID, int index)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-				sqlReader = sqlCommand.ExecuteReader();
+            try
+            {
+                sqlCommand = new SqlCommand("select * from UserNameImages where UserUniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = uniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				userNameImageList.UniqueID	= uniqueID;
-				userNameImageList.LastDALChange = DateTime.Now.Ticks;
-				while(sqlReader.Read())
-				{				
-					Int64 lastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
-					userNameImageList.LastDALChange	= (lastDALChange < userNameImageList.LastDALChange)? lastDALChange : userNameImageList.LastDALChange;
-					NameImage newNameImage = new NameImage(sqlReader["Name"].ToString(), sqlReader["ImageLocation"].ToString(), int.Parse(sqlReader["Value"].ToString()));
-					newNameImage.IsDefault = false;
-					userNameImageList.Items.Insert(index++, newNameImage);
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-			finally
-			{
-				sqlReader.Close();
-			}
-		}
+                sqlReader = sqlCommand.ExecuteReader();
 
-		protected void UpdateInternal(UserNameImageList userNameImageList)
-		{
-			try
-			{
-				UserNameImageList savedNameImageList = new UserNameImageList(userNameImageList.UniqueID);
+                userNameImageList.UniqueID = uniqueID;
+                userNameImageList.LastDALChange = DateTime.Now.Ticks;
+                while (sqlReader.Read())
+                {
+                    Int64 lastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
+                    userNameImageList.LastDALChange = (lastDALChange < userNameImageList.LastDALChange) ? lastDALChange : userNameImageList.LastDALChange;
+                    NameImage newNameImage = new NameImage(sqlReader["Name"].ToString(), sqlReader["ImageLocation"].ToString(), int.Parse(sqlReader["Value"].ToString()));
+                    newNameImage.IsDefault = false;
+                    userNameImageList.Items.Insert(index++, newNameImage);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                sqlReader.Close();
+            }
+        }
+
+        protected void UpdateInternal(UserNameImageList userNameImageList)
+        {
+            try
+            {
+                UserNameImageList savedNameImageList = new UserNameImageList(userNameImageList.UniqueID);
                 LoadToImageList(savedNameImageList, userNameImageList.UniqueID, savedNameImageList.Items.Count);
 
-				userNameImageList.LastDALChange = DateTime.Now.Ticks;
+                userNameImageList.LastDALChange = DateTime.Now.Ticks;
 
-				// Remove items that are not in the list
-				foreach(NameImage savedNameImageItem in savedNameImageList.Items)
-				{
-					bool removedItem = true;
-					foreach(NameImage nameImageItem in userNameImageList.Items)
-					{
-						if((nameImageItem.Name == savedNameImageItem.Name) &&
-							(nameImageItem.ImageLocation == savedNameImageItem.ImageLocation))
-						{
-							removedItem = false;
-							break;
-						}
-					}
+                // Remove items that are not in the list
+                foreach (NameImage savedNameImageItem in savedNameImageList.Items)
+                {
+                    bool removedItem = true;
+                    foreach (NameImage nameImageItem in userNameImageList.Items)
+                    {
+                        if ((nameImageItem.Name == savedNameImageItem.Name) &&
+                            (nameImageItem.ImageLocation == savedNameImageItem.ImageLocation))
+                        {
+                            removedItem = false;
+                            break;
+                        }
+                    }
 
-					if(removedItem)
-					{
-						SqlCommand sqlCommand = new SqlCommand("delete from UserNameImages where " + 
-							"Name=@Name and " + 
-							"UserUniqueID= '" +userNameImageList.UniqueID.ToString()+ "' and " +
-							"ImageLocation= '"+savedNameImageItem.ImageLocation+"';");
+                    if (removedItem)
+                    {
+                        SqlCommand sqlCommand = new SqlCommand("delete from UserNameImages where " +
+                            "Name=@Name and " +
+                            "UserUniqueID= '" + userNameImageList.UniqueID.ToString() + "' and " +
+                            "ImageLocation= '" + savedNameImageItem.ImageLocation + "';");
 
                         SqlParameter sqlParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
                         sqlParameter.Value = savedNameImageItem.Name;
                         sqlCommand.Parameters.Add(sqlParameter);
 
-						sqlCommand.Connection = mSqlConnection;
-						
-						int lineRemoved = sqlCommand.ExecuteNonQuery();
+                        sqlCommand.Connection = mSqlConnection;
 
-						if(lineRemoved != 1)
-						{
-							throw new System.ArgumentException("delete from UserNameImages UserUniqueID=" + userNameImageList.UniqueID.ToString() + " failed", "userNameImageList.UniqueID");
-						}	
-					}
-				}
+                        int lineRemoved = sqlCommand.ExecuteNonQuery();
 
-				// Add new Items
-				foreach(NameImage nameImageItem in userNameImageList.Items)
-				{
-					bool foundSaved = false;
-					foreach(NameImage savedNameImageItem in savedNameImageList.Items)
-					{
-						if((nameImageItem.Name == savedNameImageItem.Name) &&
-							(nameImageItem.ImageLocation == savedNameImageItem.ImageLocation))
-						{
-							foundSaved = true;
-							break;
-						}
-					}
+                        if (lineRemoved != 1)
+                        {
+                            throw new System.ArgumentException("delete from UserNameImages UserUniqueID=" + userNameImageList.UniqueID.ToString() + " failed", "userNameImageList.UniqueID");
+                        }
+                    }
+                }
 
-					if(!foundSaved)
-					{
-						SqlCommand sqlCommand = new SqlCommand("Insert Into UserNameImages" +
-							" (UserUniqueID, LastDALChange, Name, ImageLocation, Value) values ('" +
-							userNameImageList.UniqueID.ToString()	+ "', '" + 
-							userNameImageList.LastDALChange.ToString()	+ "', " + 
-							"@Name, '" + 
-							nameImageItem.ImageLocation				+ "', '" +
+                // Add new Items
+                foreach (NameImage nameImageItem in userNameImageList.Items)
+                {
+                    bool foundSaved = false;
+                    foreach (NameImage savedNameImageItem in savedNameImageList.Items)
+                    {
+                        if ((nameImageItem.Name == savedNameImageItem.Name) &&
+                            (nameImageItem.ImageLocation == savedNameImageItem.ImageLocation))
+                        {
+                            foundSaved = true;
+                            break;
+                        }
+                    }
+
+                    if (!foundSaved)
+                    {
+                        SqlCommand sqlCommand = new SqlCommand("Insert Into UserNameImages" +
+                            " (UserUniqueID, LastDALChange, Name, ImageLocation, Value) values ('" +
+                            userNameImageList.UniqueID.ToString() + "', '" +
+                            userNameImageList.LastDALChange.ToString() + "', " +
+                            "@Name, '" +
+                            nameImageItem.ImageLocation + "', '" +
                             nameImageItem.Value.ToString() + "');");
 
                         SqlParameter sqlParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
                         sqlParameter.Value = nameImageItem.Name;
                         sqlCommand.Parameters.Add(sqlParameter);
 
-						sqlCommand.Connection = mSqlConnection;
-						
-						int lineInserted = sqlCommand.ExecuteNonQuery();
+                        sqlCommand.Connection = mSqlConnection;
 
-						if(lineInserted != 1)
-						{
-							throw new System.ArgumentException("Insert Into UserNameImages UserUniqueID=" + userNameImageList.UniqueID.ToString() + " failed", "userNameImageList.UniqueID");
-						}	
-					}
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-		}
-	}
+                        int lineInserted = sqlCommand.ExecuteNonQuery();
+
+                        if (lineInserted != 1)
+                        {
+                            throw new System.ArgumentException("Insert Into UserNameImages UserUniqueID=" + userNameImageList.UniqueID.ToString() + " failed", "userNameImageList.UniqueID");
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+    }
 }

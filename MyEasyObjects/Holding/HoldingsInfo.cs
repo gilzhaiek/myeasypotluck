@@ -13,95 +13,95 @@ using MyEasyObjects.Item;
 
 namespace MyEasyObjects.Holding
 {
-	public class UserPermission
-	{
-		#region Members
-		 
-		UInt64					mHoldingInfoUniqueID;
-		UserBase				mUserBase;
-		EHoldingPermissions		mHoldingPermission;
+    public class UserPermission
+    {
+        #region Members
 
-		#endregion
-		
-		public UserPermission()
-		{
-			mHoldingInfoUniqueID	= 0;
-			mUserBase				= null;
-			mHoldingPermission		= EHoldingPermissions.eHoldingPermissionsNull;
-		}
+        UInt64 mHoldingInfoUniqueID;
+        UserBase mUserBase;
+        EHoldingPermissions mHoldingPermission;
 
-		public UserPermission(UInt64 holdingInfoUniqueID)
-		{
-			mHoldingInfoUniqueID	= holdingInfoUniqueID;
-			mUserBase				= null;
-			mHoldingPermission		= EHoldingPermissions.eHoldingPermissionsNull;
-		}
+        #endregion
 
-		public UserPermission(UInt64 holdingInfoUniqueID, UserBase userBase, EHoldingPermissions holdingPermission)
-		{
-			mHoldingInfoUniqueID	= holdingInfoUniqueID;
-			mUserBase				= userBase;
-			mHoldingPermission		= holdingPermission;
-		}
+        public UserPermission()
+        {
+            mHoldingInfoUniqueID = 0;
+            mUserBase = null;
+            mHoldingPermission = EHoldingPermissions.eHoldingPermissionsNull;
+        }
 
-		#region Properties
+        public UserPermission(UInt64 holdingInfoUniqueID)
+        {
+            mHoldingInfoUniqueID = holdingInfoUniqueID;
+            mUserBase = null;
+            mHoldingPermission = EHoldingPermissions.eHoldingPermissionsNull;
+        }
 
-		public UInt64				HoldingInfoUniqueID
-		{
-			get {return mHoldingInfoUniqueID;}
-			set {mHoldingInfoUniqueID = value;}
-		}
+        public UserPermission(UInt64 holdingInfoUniqueID, UserBase userBase, EHoldingPermissions holdingPermission)
+        {
+            mHoldingInfoUniqueID = holdingInfoUniqueID;
+            mUserBase = userBase;
+            mHoldingPermission = holdingPermission;
+        }
 
-		public UserBase				UserBase
-		{
-			get {return mUserBase;}
-			set {mUserBase = value;}
-		}
+        #region Properties
 
-		public EHoldingPermissions	HoldingPermission
-		{
-			get {return mHoldingPermission;}
-			set {mHoldingPermission = value;}
-		}
+        public UInt64 HoldingInfoUniqueID
+        {
+            get { return mHoldingInfoUniqueID; }
+            set { mHoldingInfoUniqueID = value; }
+        }
 
-		#endregion
-	}
+        public UserBase UserBase
+        {
+            get { return mUserBase; }
+            set { mUserBase = value; }
+        }
 
-	public class HoldingsInfo : MyObjectBase, INotifyPropertyChanged
-	{
-		#region Members
+        public EHoldingPermissions HoldingPermission
+        {
+            get { return mHoldingPermission; }
+            set { mHoldingPermission = value; }
+        }
 
-		UserBase				mHoldingUser		= null;
+        #endregion
+    }
 
-		EHoldingPermissions		mHoldingUserPermission = EHoldingPermissions.eHoldingPermissionsNull;
+    public class HoldingsInfo : MyObjectBase, INotifyPropertyChanged
+    {
+        #region Members
 
-		EventBase				mEventOwner			= null;
-		
-		ItemBase				mItemOwner			= null;
+        UserBase mHoldingUser = null;
 
-		List<UserPermission>	mUserPermissions	= new List<UserPermission>();
+        EHoldingPermissions mHoldingUserPermission = EHoldingPermissions.eHoldingPermissionsNull;
 
-		List<int>				mHoldingTypes		= new List<int>();
+        EventBase mEventOwner = null;
 
-		bool					mAllowOverBooking	= false;
+        ItemBase mItemOwner = null;
 
-		bool					mScalable			= false;
+        List<UserPermission> mUserPermissions = new List<UserPermission>();
 
-		bool					mNeedsOwnerApprovel	= false;
+        List<int> mHoldingTypes = new List<int>();
 
-		EHoldingApprovel		mHoldingApprovel	= EHoldingApprovel.eHoldingApprovelNull;  // Incase mNeedsOwnerApprovel is true
+        bool mAllowOverBooking = false;
+
+        bool mScalable = false;
+
+        bool mNeedsOwnerApprovel = false;
+
+        EHoldingApprovel mHoldingApprovel = EHoldingApprovel.eHoldingApprovelNull;  // Incase mNeedsOwnerApprovel is true
 
 
-		#endregion
+        #endregion
 
-		#region Consturctor
+        #region Consturctor
 
-		public HoldingsInfo()
-		{
-			mHoldingUser = new UserBase();
-			mEventOwner = new EventBase();
-			mItemOwner	= new ItemBase();
-		}
+        public HoldingsInfo()
+        {
+            mHoldingUser = new UserBase();
+            mEventOwner = new EventBase();
+            mItemOwner = new ItemBase();
+        }
 
         public HoldingsInfo(UserBase holdingUser)
         {
@@ -117,348 +117,348 @@ namespace MyEasyObjects.Holding
             mItemOwner = itemBase;
         }
 
-		public HoldingsInfo(UInt64 uniqueID)
-			: base(uniqueID)
-		{
-			mHoldingUser = new UserBase();
-			mEventOwner = new EventBase();
-			mItemOwner	= new ItemBase();
-		}
+        public HoldingsInfo(UInt64 uniqueID)
+            : base(uniqueID)
+        {
+            mHoldingUser = new UserBase();
+            mEventOwner = new EventBase();
+            mItemOwner = new ItemBase();
+        }
 
-		public HoldingsInfo(UInt64 uniqueID, EventBase eventBase, ItemBase itemBase)
-			: base(uniqueID)
-		{
-			mHoldingUser	= new UserBase();
-			mEventOwner		= eventBase;
-			mItemOwner		= itemBase;
-		}
+        public HoldingsInfo(UInt64 uniqueID, EventBase eventBase, ItemBase itemBase)
+            : base(uniqueID)
+        {
+            mHoldingUser = new UserBase();
+            mEventOwner = eventBase;
+            mItemOwner = itemBase;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
-		public override UInt64 UniqueID
-		{
-			get
-			{
-				return base.UniqueID;
-			}
-			set
-			{
-				foreach(UserPermission userPermission in mUserPermissions)
-				{
-					userPermission.HoldingInfoUniqueID = value;
-				}
+        #region Properties
+        public override UInt64 UniqueID
+        {
+            get
+            {
+                return base.UniqueID;
+            }
+            set
+            {
+                foreach (UserPermission userPermission in mUserPermissions)
+                {
+                    userPermission.HoldingInfoUniqueID = value;
+                }
 
-				base.UniqueID = value;
-			}
-		}
+                base.UniqueID = value;
+            }
+        }
 
-		public UserBase	HoldingUser
-		{
-			get
-			{
-				if(mHoldingUser == null)
-					mHoldingUser = new UserBase();
-				return mHoldingUser;
-			}
-			set 
-			{
-				if (mHoldingUser != value)
-				{
-					mHoldingUser = value;
-					OnPropertyChanged("HoldingsInfo.HoldingUser.Changed");
-				}
-			}
-		}
+        public UserBase HoldingUser
+        {
+            get
+            {
+                if (mHoldingUser == null)
+                    mHoldingUser = new UserBase();
+                return mHoldingUser;
+            }
+            set
+            {
+                if (mHoldingUser != value)
+                {
+                    mHoldingUser = value;
+                    OnPropertyChanged("HoldingsInfo.HoldingUser.Changed");
+                }
+            }
+        }
 
-		public EHoldingPermissions HoldingUserPermissions
-		{
-			get { return mHoldingUserPermission;}
-			set
-			{
-				if (mHoldingUserPermission != value)
-				{
-					mHoldingUserPermission = value;
-					OnPropertyChanged("HoldingsInfo.HoldingUserPermission.Changed");
-				}
-			}
-		}
+        public EHoldingPermissions HoldingUserPermissions
+        {
+            get { return mHoldingUserPermission; }
+            set
+            {
+                if (mHoldingUserPermission != value)
+                {
+                    mHoldingUserPermission = value;
+                    OnPropertyChanged("HoldingsInfo.HoldingUserPermission.Changed");
+                }
+            }
+        }
 
-		public EventBase EventOwner
-		{
-			get { return mEventOwner;}
-			set
-			{
-				if (mEventOwner != value)
-				{
-					mEventOwner = value;
-					OnPropertyChanged("HoldingsInfo.EventOwner.Changed");
-				}
-			}
-		}
+        public EventBase EventOwner
+        {
+            get { return mEventOwner; }
+            set
+            {
+                if (mEventOwner != value)
+                {
+                    mEventOwner = value;
+                    OnPropertyChanged("HoldingsInfo.EventOwner.Changed");
+                }
+            }
+        }
 
-		public ItemBase ItemOwner
-		{
-			get
-			{
-				if(mItemOwner == null)
-					mItemOwner = new ItemBase();
+        public ItemBase ItemOwner
+        {
+            get
+            {
+                if (mItemOwner == null)
+                    mItemOwner = new ItemBase();
 
-				return mItemOwner;
-			}
-			set
-			{
-				if (mItemOwner != value)
-				{
-					mItemOwner = value;
-					OnPropertyChanged("HoldingsInfo.ItemOwner.Changed");
-				}
-			}
-		}
+                return mItemOwner;
+            }
+            set
+            {
+                if (mItemOwner != value)
+                {
+                    mItemOwner = value;
+                    OnPropertyChanged("HoldingsInfo.ItemOwner.Changed");
+                }
+            }
+        }
 
-		public List<UserPermission>		UserPermissions
-		{
-			get {return mUserPermissions;}
-		}
+        public List<UserPermission> UserPermissions
+        {
+            get { return mUserPermissions; }
+        }
 
-		public List<int> HoldingTypes
-		{
-			get { return mHoldingTypes; }
-			set
-			{
-				if (mHoldingTypes != value)
-				{
-					mHoldingTypes = value;
-					OnPropertyChanged("HoldingsInfo.HoldingTypes.Changed");
-				}
-			}
-		}
+        public List<int> HoldingTypes
+        {
+            get { return mHoldingTypes; }
+            set
+            {
+                if (mHoldingTypes != value)
+                {
+                    mHoldingTypes = value;
+                    OnPropertyChanged("HoldingsInfo.HoldingTypes.Changed");
+                }
+            }
+        }
 
-		public bool AllowOverBooking
-		{
-			get { return mAllowOverBooking; }
-			set
-			{
-				if (mAllowOverBooking != value)
-				{
-					mAllowOverBooking = value;
-					OnPropertyChanged("HoldingsInfo.AllowOverBooking.Changed");
-				}
-			}
-		}
+        public bool AllowOverBooking
+        {
+            get { return mAllowOverBooking; }
+            set
+            {
+                if (mAllowOverBooking != value)
+                {
+                    mAllowOverBooking = value;
+                    OnPropertyChanged("HoldingsInfo.AllowOverBooking.Changed");
+                }
+            }
+        }
 
-		public bool Scalable
-		{
-			get { return mScalable; }
-			set
-			{
-				if (mScalable != value)
-				{
-					mScalable = value;
-					OnPropertyChanged("HoldingsInfo.Scalable.Changed");
-				}
-			}
-		}
+        public bool Scalable
+        {
+            get { return mScalable; }
+            set
+            {
+                if (mScalable != value)
+                {
+                    mScalable = value;
+                    OnPropertyChanged("HoldingsInfo.Scalable.Changed");
+                }
+            }
+        }
 
-		public bool NeedsOwnerApprovel
-		{
-			get { return mNeedsOwnerApprovel; }
-			set
-			{
-				if (mNeedsOwnerApprovel != value)
-				{
-					mNeedsOwnerApprovel = value;
-					OnPropertyChanged("HoldingsInfo.NeedsOwnerApprovel.Changed");
-				}
-			}
-		}
+        public bool NeedsOwnerApprovel
+        {
+            get { return mNeedsOwnerApprovel; }
+            set
+            {
+                if (mNeedsOwnerApprovel != value)
+                {
+                    mNeedsOwnerApprovel = value;
+                    OnPropertyChanged("HoldingsInfo.NeedsOwnerApprovel.Changed");
+                }
+            }
+        }
 
-		public EHoldingApprovel HoldingApprovel
-		{
-			get { return mHoldingApprovel; }
-			set
-			{
-				if (mHoldingApprovel != value)
-				{
-					mHoldingApprovel = value;
-					OnPropertyChanged("HoldingsInfo.HoldingApprovel.Changed");
-				}
-			}
-		}
+        public EHoldingApprovel HoldingApprovel
+        {
+            get { return mHoldingApprovel; }
+            set
+            {
+                if (mHoldingApprovel != value)
+                {
+                    mHoldingApprovel = value;
+                    OnPropertyChanged("HoldingsInfo.HoldingApprovel.Changed");
+                }
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region String Conversion Members
+        #region String Conversion Members
 
-		public override string ToString()
-		{
-			if (IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
-			else
-			{
-				string retStr = UniqueID.ToString();
+        public override string ToString()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
+            else
+            {
+                string retStr = UniqueID.ToString();
 
-				if(HoldingUser == null)
-					retStr += mDelim + "0";
-				else
-					retStr += mDelim + HoldingUser.UniqueID.ToString();
+                if (HoldingUser == null)
+                    retStr += mDelim + "0";
+                else
+                    retStr += mDelim + HoldingUser.UniqueID.ToString();
 
-				if(EventOwner == null)
-					retStr += mDelim + "0";
-				else
-					retStr += mDelim + EventOwner.UniqueID.ToString();
+                if (EventOwner == null)
+                    retStr += mDelim + "0";
+                else
+                    retStr += mDelim + EventOwner.UniqueID.ToString();
 
-				if(ItemOwner == null)
-					retStr += mDelim + "0";
-				else
-					retStr += mDelim + ItemOwner.UniqueID.ToString();
+                if (ItemOwner == null)
+                    retStr += mDelim + "0";
+                else
+                    retStr += mDelim + ItemOwner.UniqueID.ToString();
 
-				retStr += mDelim + UserPermissions.Count.ToString();
-				for(int i = 0; i < UserPermissions.Count; i++)
-				{
-					retStr += mDelim + UserPermissions[i].UserBase.UniqueID.ToString();
-					retStr += mDelim + ((int)UserPermissions[i].HoldingPermission).ToString();
-				}
+                retStr += mDelim + UserPermissions.Count.ToString();
+                for (int i = 0; i < UserPermissions.Count; i++)
+                {
+                    retStr += mDelim + UserPermissions[i].UserBase.UniqueID.ToString();
+                    retStr += mDelim + ((int)UserPermissions[i].HoldingPermission).ToString();
+                }
 
-				retStr += mDelim + HoldingTypes.Count.ToString();
-				for(int i = 0; i < HoldingTypes.Count; i++)
-					retStr += mDelim + HoldingTypes[i].ToString();	
-	
-				retStr += mDelim + AllowOverBooking.ToString();
+                retStr += mDelim + HoldingTypes.Count.ToString();
+                for (int i = 0; i < HoldingTypes.Count; i++)
+                    retStr += mDelim + HoldingTypes[i].ToString();
 
-				retStr += mDelim + Scalable.ToString();
+                retStr += mDelim + AllowOverBooking.ToString();
 
-				retStr += mDelim + NeedsOwnerApprovel.ToString();
+                retStr += mDelim + Scalable.ToString();
 
-				retStr += mDelim + ((int)HoldingApprovel).ToString();
+                retStr += mDelim + NeedsOwnerApprovel.ToString();
 
-				return retStr;
-			}
-		}
-		
-		public static HoldingsInfo Parse(SqlString sqlStr)
-		{
-			if (sqlStr.IsNull)
-				return null;
-			else
-			{
-				return Parse(Convert.ToString(sqlStr));
-			}
-		}
+                retStr += mDelim + ((int)HoldingApprovel).ToString();
 
-		public static HoldingsInfo Parse(string str)
-		{
-			int strCnt = 0;
+                return retStr;
+            }
+        }
 
-			HoldingsInfo holdingsInfo = new HoldingsInfo();
+        public static HoldingsInfo Parse(SqlString sqlStr)
+        {
+            if (sqlStr.IsNull)
+                return null;
+            else
+            {
+                return Parse(Convert.ToString(sqlStr));
+            }
+        }
 
-			string[] strSplit = null;
-			strSplit = str.Split(new char[] { ';' });
+        public static HoldingsInfo Parse(string str)
+        {
+            int strCnt = 0;
 
-			strCnt = Parse(holdingsInfo, strSplit, strCnt);
+            HoldingsInfo holdingsInfo = new HoldingsInfo();
 
-			return holdingsInfo;
-		}
-		
-		public static int Parse(HoldingsInfo holdingsInfo, string[] strSplit, int strCnt)
-		{
-			int count = 0;
+            string[] strSplit = null;
+            strSplit = str.Split(new char[] { ';' });
 
-			holdingsInfo.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            strCnt = Parse(holdingsInfo, strSplit, strCnt);
 
-			holdingsInfo.HoldingUser.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            return holdingsInfo;
+        }
 
-			holdingsInfo.EventOwner.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+        public static int Parse(HoldingsInfo holdingsInfo, string[] strSplit, int strCnt)
+        {
+            int count = 0;
 
-			holdingsInfo.ItemOwner.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            holdingsInfo.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-			count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			for(int i = 0; i < count; i++)
-			{
-				if(strSplit[strCnt] == null)
-					break;
+            holdingsInfo.HoldingUser.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-				UserPermission userPermission = new UserPermission(
-					holdingsInfo.UniqueID,
-					new UserBase(Convert.ToUInt64(strSplit[strCnt++])),
-					(EHoldingPermissions)Convert.ToInt32(strSplit[strCnt++]));
+            holdingsInfo.EventOwner.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-				holdingsInfo.UserPermissions.Add(userPermission);
-			}
-			
-			count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			for(int i = 0; i < count; i++)
-			{
-				if(strSplit[strCnt] == null)
-					break;
-				holdingsInfo.HoldingTypes.Add(Convert.ToInt32(strSplit[strCnt])); strCnt++;
-			}
+            holdingsInfo.ItemOwner.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-			holdingsInfo.AllowOverBooking		= Convert.ToBoolean(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            for (int i = 0; i < count; i++)
+            {
+                if (strSplit[strCnt] == null)
+                    break;
 
-			holdingsInfo.Scalable				= Convert.ToBoolean(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+                UserPermission userPermission = new UserPermission(
+                    holdingsInfo.UniqueID,
+                    new UserBase(Convert.ToUInt64(strSplit[strCnt++])),
+                    (EHoldingPermissions)Convert.ToInt32(strSplit[strCnt++]));
 
-			holdingsInfo.NeedsOwnerApprovel		= Convert.ToBoolean(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+                holdingsInfo.UserPermissions.Add(userPermission);
+            }
 
-			holdingsInfo.HoldingApprovel	= (EHoldingApprovel)Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            for (int i = 0; i < count; i++)
+            {
+                if (strSplit[strCnt] == null)
+                    break;
+                holdingsInfo.HoldingTypes.Add(Convert.ToInt32(strSplit[strCnt])); strCnt++;
+            }
 
-			return strCnt;
-		}
+            holdingsInfo.AllowOverBooking = Convert.ToBoolean(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		#endregion
+            holdingsInfo.Scalable = Convert.ToBoolean(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		
-		#region IComparable Members
+            holdingsInfo.NeedsOwnerApprovel = Convert.ToBoolean(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		//Override the Equals method        
-		public override bool Equals(object other)
-		{
-			return CompareTo(other) == 0;
-		}
+            holdingsInfo.HoldingApprovel = (EHoldingApprovel)Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		//Override the GetHashCode method
-		public override int GetHashCode()
-		{
-			if(IsNull)// || (!IsLoaded()))
-				return 0;
+            return strCnt;
+        }
 
-			return this.ToString().GetHashCode();
-		}
+        #endregion
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Other object is null
-		//		The argument to compare is not a UserBase
-		//		Refering object (this) is null
-		public override int CompareTo(object other)
-		{
-			if (other == null)
-				throw new System.ArgumentException("Other object is null", "other");
 
-			HoldingsInfo holdingsInfo = other as HoldingsInfo;
+        #region IComparable Members
 
-			if (holdingsInfo == null)
-				throw new System.ArgumentException("The argument to compare is not a holdingsInfo", "other");
+        //Override the Equals method        
+        public override bool Equals(object other)
+        {
+            return CompareTo(other) == 0;
+        }
 
-			if(IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("Refering object (this) is null", "this");
+        //Override the GetHashCode method
+        public override int GetHashCode()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                return 0;
 
-			return this.ToString().CompareTo(holdingsInfo.ToString());
-		}
+            return this.ToString().GetHashCode();
+        }
 
-		#endregion
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Other object is null
+        //		The argument to compare is not a UserBase
+        //		Refering object (this) is null
+        public override int CompareTo(object other)
+        {
+            if (other == null)
+                throw new System.ArgumentException("Other object is null", "other");
 
-		#region INotifyPropertyChanged Members
+            HoldingsInfo holdingsInfo = other as HoldingsInfo;
 
-		public event PropertyChangedEventHandler PropertyChanged;
+            if (holdingsInfo == null)
+                throw new System.ArgumentException("The argument to compare is not a holdingsInfo", "other");
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if (handler != null)
-				handler(this, new PropertyChangedEventArgs(propertyName));
-		}
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("Refering object (this) is null", "this");
 
-		#endregion
-	}
+            return this.ToString().CompareTo(holdingsInfo.ToString());
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

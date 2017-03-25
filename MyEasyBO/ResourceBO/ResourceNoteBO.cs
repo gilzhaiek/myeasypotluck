@@ -8,66 +8,66 @@ using MyEasyObjects.User;
 
 namespace MyEasyBO.ResourceBO
 {
-	public class ResourceNoteBO
-	{
-		#region Members
+    public class ResourceNoteBO
+    {
+        #region Members
 
-		ResourceNoteDAL mResourceNoteDAL = new ResourceNoteDAL();
+        ResourceNoteDAL mResourceNoteDAL = new ResourceNoteDAL();
 
-		#endregion
+        #endregion
 
-		public void ClearValues(ResourceNote resourceNote)
-		{
-			resourceNote.UniqueID		= 0;
+        public void ClearValues(ResourceNote resourceNote)
+        {
+            resourceNote.UniqueID = 0;
 
-			resourceNote.NoteWriter		= new UserBase();
+            resourceNote.NoteWriter = new UserBase();
 
-			resourceNote.ResourceBase	= new ResourceBase();
+            resourceNote.ResourceBase = new ResourceBase();
 
-			resourceNote.Note			= "";
+            resourceNote.Note = "";
 
-			resourceNote.EntryDate		= null;
-		}
+            resourceNote.EntryDate = null;
+        }
 
-		public void Save(ResourceNote resourceNote)
-		{
-			mResourceNoteDAL.Save(resourceNote);
-		}
+        public void Save(ResourceNote resourceNote)
+        {
+            mResourceNoteDAL.Save(resourceNote);
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		resourceNote is null when loading ResourceNote
-		//		Load Failed
-		public void Load(ResourceNote resourceNote)
-		{
-			try
-			{
-				if(resourceNote.IsNull)
-				{
-					throw new System.ArgumentException("resourceNote is null when loading ResourceNote", "resourceNote");
-				}				
+        // Exceptions:
+        //	System.ArgumentException:
+        //		resourceNote is null when loading ResourceNote
+        //		Load Failed
+        public void Load(ResourceNote resourceNote)
+        {
+            try
+            {
+                if (resourceNote.IsNull)
+                {
+                    throw new System.ArgumentException("resourceNote is null when loading ResourceNote", "resourceNote");
+                }
 
-				Load(resourceNote, resourceNote.UniqueID);
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "resourceNote");
-			}
-		}
+                Load(resourceNote, resourceNote.UniqueID);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "resourceNote");
+            }
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Load Failed
-		public void Load(ResourceNote resourceNote, UInt64 uniqueID)
-		{
-			try
-			{
-				mResourceNoteDAL.Load(resourceNote, uniqueID);
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "resourceNote");
-			}
-		}
-	}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Load Failed
+        public void Load(ResourceNote resourceNote, UInt64 uniqueID)
+        {
+            try
+            {
+                mResourceNoteDAL.Load(resourceNote, uniqueID);
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "resourceNote");
+            }
+        }
+    }
 }

@@ -14,101 +14,101 @@ using System.Data;
 
 namespace MyEasyDAL.User
 {
-	public class UserBaseDAL : MyObjectBaseDAL, UserBaseIDAL
-	{
-		public bool IsLatest(UserBase userBase)
-		{
-			UserBase upToDateUserBase = new UserBase();
+    public class UserBaseDAL : MyObjectBaseDAL, UserBaseIDAL
+    {
+        public bool IsLatest(UserBase userBase)
+        {
+            UserBase upToDateUserBase = new UserBase();
 
-			Load(upToDateUserBase, userBase.UniqueID);
+            Load(upToDateUserBase, userBase.UniqueID);
 
-			return (upToDateUserBase.LastDALChange == userBase.LastDALChange);
-		}
+            return (upToDateUserBase.LastDALChange == userBase.LastDALChange);
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		userBase is null when saving UserBase
-		public void	Save(UserBase userBase)
-		{
-			if(userBase.IsNull)
-			{
-				throw new System.ArgumentException("userBase is null when saving UserBase", "userBase");
-			}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		userBase is null when saving UserBase
+        public void Save(UserBase userBase)
+        {
+            if (userBase.IsNull)
+            {
+                throw new System.ArgumentException("userBase is null when saving UserBase", "userBase");
+            }
 
-			if(UserBaseExists(userBase.UniqueID))
-			{
-				UserBase upToDateUserBase = new UserBase();
+            if (UserBaseExists(userBase.UniqueID))
+            {
+                UserBase upToDateUserBase = new UserBase();
 
-				try
-				{
-					Load(upToDateUserBase, userBase.UniqueID);
-				}
-				catch
-				{
-					SaveInternal(userBase);
-					return;
-				}
+                try
+                {
+                    Load(upToDateUserBase, userBase.UniqueID);
+                }
+                catch
+                {
+                    SaveInternal(userBase);
+                    return;
+                }
 
-				if(userBase.CompareTo(upToDateUserBase) != 0)
-					UpdateInternal(userBase);
-			}
-			else
-				SaveInternal(userBase);
-		}
+                if (userBase.CompareTo(upToDateUserBase) != 0)
+                    UpdateInternal(userBase);
+            }
+            else
+                SaveInternal(userBase);
+        }
 
         public bool UserBaseExists(UInt64 uniqueID)
-		{
+        {
             return ObjectBaseExists(uniqueID, "UserBase", "UniqueID");
-		}
+        }
 
-		public void Load(UserBase userBase, UInt64 uniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public void Load(UserBase userBase, UInt64 uniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select * from UserBase where UniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = uniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select * from UserBase where UniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = uniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				if(!sqlReader.Read())
-				{
-					throw new System.ArgumentException("userBase with uniqueID=" + uniqueID.ToString() + " was not found", "uniqueID");
-				}
-				
-				userBase.UniqueID		= uniqueID;
-				userBase.LastDALChange	= Convert.ToInt64(sqlReader["LastDALChange"].ToString());
-				userBase.FirstName		= sqlReader["FirstName"].ToString();
-				userBase.LastName		= sqlReader["LastName"].ToString();
-				userBase.Email			= sqlReader["Email"].ToString();
-				userBase.Phone			= sqlReader["Phone"].ToString();
-				userBase.Gender			= (EGender)Enum.Parse(typeof(EGender), sqlReader["EGender"].ToString());
-				userBase.Title			= (ETitle)Enum.Parse(typeof(ETitle), sqlReader["ETitle"].ToString());
-				userBase.Location		= new ObjectLocation(Convert.ToUInt64(sqlReader["LocationUniqueID"].ToString()));
-                userBase.FBUser         = Convert.ToBoolean(sqlReader["FBUser"].ToString());
-                userBase.LastFBSync     = Convert.ToInt64(sqlReader["LastFBSync"].ToString());
+                sqlReader = sqlCommand.ExecuteReader();
+                if (!sqlReader.Read())
+                {
+                    throw new System.ArgumentException("userBase with uniqueID=" + uniqueID.ToString() + " was not found", "uniqueID");
+                }
 
-				if(sqlReader.Read())
-				{
-					throw new ArgumentException("Multiple UniqueID=" + uniqueID.ToString() + " were found in UserBase", "uniqueID");
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-			finally
-			{
-				sqlReader.Close();
+                userBase.UniqueID = uniqueID;
+                userBase.LastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
+                userBase.FirstName = sqlReader["FirstName"].ToString();
+                userBase.LastName = sqlReader["LastName"].ToString();
+                userBase.Email = sqlReader["Email"].ToString();
+                userBase.Phone = sqlReader["Phone"].ToString();
+                userBase.Gender = (EGender)Enum.Parse(typeof(EGender), sqlReader["EGender"].ToString());
+                userBase.Title = (ETitle)Enum.Parse(typeof(ETitle), sqlReader["ETitle"].ToString());
+                userBase.Location = new ObjectLocation(Convert.ToUInt64(sqlReader["LocationUniqueID"].ToString()));
+                userBase.FBUser = Convert.ToBoolean(sqlReader["FBUser"].ToString());
+                userBase.LastFBSync = Convert.ToInt64(sqlReader["LastFBSync"].ToString());
+
+                if (sqlReader.Read())
+                {
+                    throw new ArgumentException("Multiple UniqueID=" + uniqueID.ToString() + " were found in UserBase", "uniqueID");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                sqlReader.Close();
                 mSqlConnection.Close();
-			}
-		}
+            }
+        }
 
-		protected void UpdateInternal(UserBase userBase)
-		{
+        protected void UpdateInternal(UserBase userBase)
+        {
             try
             {
                 userBase.LastDALChange = DateTime.Now.Ticks;
@@ -151,10 +151,10 @@ namespace MyEasyDAL.User
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		protected void SaveInternal(UserBase userBase)
-		{
+        protected void SaveInternal(UserBase userBase)
+        {
             try
             {
                 userBase.LastDALChange = DateTime.Now.Ticks;
@@ -197,6 +197,6 @@ namespace MyEasyDAL.User
             {
                 mSqlConnection.Close();
             }
-		}
-	}
+        }
+    }
 }

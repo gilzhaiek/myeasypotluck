@@ -14,95 +14,95 @@ using MyEasyObjects.Event;
 
 namespace MyEasyBO.Item
 {
-	public class ItemBaseBO : ResourceBaseBO
-	{
-		#region Members
+    public class ItemBaseBO : ResourceBaseBO
+    {
+        #region Members
 
-		ItemBaseDAL				mItemBaseDAL			= new ItemBaseDAL();
-		ResourceDescriptionBO	mResourceDescriptionBO	= new ResourceDescriptionBO();
+        ItemBaseDAL mItemBaseDAL = new ItemBaseDAL();
+        ResourceDescriptionBO mResourceDescriptionBO = new ResourceDescriptionBO();
 
-		HoldingsInfoBO			mHoldingsInfoBO			= new HoldingsInfoBO();		
-		
-		#endregion
+        HoldingsInfoBO mHoldingsInfoBO = new HoldingsInfoBO();
 
-		#region Functions
+        #endregion
 
-		public void ClearValues(ItemBase itemBase)
-		{
-			// ResourceBase
-			base.ClearValues((ResourceBase)itemBase);
+        #region Functions
 
-			// ItemBase
-			itemBase.ItemParent			= new ItemBase();
-			itemBase.ItemChildren.Clear();
-			itemBase.ThumbNameImage		= new NameImage();
-            itemBase.FullNameImage      = new NameImage();
-		}
+        public void ClearValues(ItemBase itemBase)
+        {
+            // ResourceBase
+            base.ClearValues((ResourceBase)itemBase);
 
-		public void Save(ItemBase itemBase)
-		{	
-			mItemBaseDAL.Save(itemBase);
+            // ItemBase
+            itemBase.ItemParent = new ItemBase();
+            itemBase.ItemChildren.Clear();
+            itemBase.ThumbNameImage = new NameImage();
+            itemBase.FullNameImage = new NameImage();
+        }
 
-			mResourceDescriptionBO.Save(itemBase.ResourceDescription);
+        public void Save(ItemBase itemBase)
+        {
+            mItemBaseDAL.Save(itemBase);
 
-			foreach(HoldingsInfo holdingsInfo in itemBase.HoldingsInfo)
-			{
+            mResourceDescriptionBO.Save(itemBase.ResourceDescription);
+
+            foreach (HoldingsInfo holdingsInfo in itemBase.HoldingsInfo)
+            {
                 if (holdingsInfo.EventOwner.UniqueID == 0)
                     holdingsInfo.EventOwner.UniqueID = itemBase.EventParent.UniqueID;
 
                 if (holdingsInfo.ItemOwner.UniqueID == 0)
                     holdingsInfo.ItemOwner.UniqueID = itemBase.UniqueID;
 
-				mHoldingsInfoBO.Save(holdingsInfo);
-			}
-		}
+                mHoldingsInfoBO.Save(holdingsInfo);
+            }
+        }
 
-		public void Delete(ItemBase itemBase)
-		{	
-			mResourceDescriptionBO.Delete(itemBase.ResourceDescription);
+        public void Delete(ItemBase itemBase)
+        {
+            mResourceDescriptionBO.Delete(itemBase.ResourceDescription);
 
-			foreach(HoldingsInfo holdingsInfo in itemBase.HoldingsInfo)
-			{
-				mHoldingsInfoBO.Delete(holdingsInfo);
-			}
+            foreach (HoldingsInfo holdingsInfo in itemBase.HoldingsInfo)
+            {
+                mHoldingsInfoBO.Delete(holdingsInfo);
+            }
 
             if (!itemBase.IsLoaded())
                 Load(itemBase);
 
-			mItemBaseDAL.Delete(itemBase);
-		}
+            mItemBaseDAL.Delete(itemBase);
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		itemBase is null when loading ItemBase
-		//		Load Failed
-		public void Load(ItemBase itemBase, bool loadChildren = true)
-		{
-			try
-			{
-				if(itemBase.IsNull)
-				{
-					throw new System.ArgumentException("itemBase is null when loading ItemBase", "itemBase");
-				}				
+        // Exceptions:
+        //	System.ArgumentException:
+        //		itemBase is null when loading ItemBase
+        //		Load Failed
+        public void Load(ItemBase itemBase, bool loadChildren = true)
+        {
+            try
+            {
+                if (itemBase.IsNull)
+                {
+                    throw new System.ArgumentException("itemBase is null when loading ItemBase", "itemBase");
+                }
 
-				//mResourceDescriptionBO.Load(itemBase.ResourceDescription);
+                //mResourceDescriptionBO.Load(itemBase.ResourceDescription);
                 LoadInternal(itemBase, loadChildren);
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "resourceBase");
-			}
-		}
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "resourceBase");
+            }
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Load Failed
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Load Failed
         protected void LoadInternal(ItemBase itemBase, bool loadChildren)
-		{
-			try
-			{
+        {
+            try
+            {
                 List<UInt64> uniqueIDs;
-				//ClearValues(itemBase);  Not sure why I did this
+                //ClearValues(itemBase);  Not sure why I did this
 
                 mItemBaseDAL.Load(itemBase, itemBase.UniqueID);
 
@@ -128,55 +128,55 @@ namespace MyEasyBO.Item
                 }
 
                 uniqueIDs = mHoldingsInfoBO.GetUniqueIDsByItemOwner(itemBase.UniqueID);
-				foreach(UInt64 holdingsUniqueID in uniqueIDs)
-				{
-					HoldingsInfo holdingsInfo = new HoldingsInfo (holdingsUniqueID );
-					// mHoldingsInfoBO.Load(holdingsInfo); // No Need to load yet...
-					itemBase.HoldingsInfo.Add(holdingsInfo);
-				}
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "itemBase");
-			}
-		}
+                foreach (UInt64 holdingsUniqueID in uniqueIDs)
+                {
+                    HoldingsInfo holdingsInfo = new HoldingsInfo(holdingsUniqueID);
+                    // mHoldingsInfoBO.Load(holdingsInfo); // No Need to load yet...
+                    itemBase.HoldingsInfo.Add(holdingsInfo);
+                }
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "itemBase");
+            }
+        }
 
-		public bool IsLatest(ItemBase itemBase, bool checkRelations)
-		{
-			return mItemBaseDAL.IsLatest(itemBase, checkRelations);
-		}
+        public bool IsLatest(ItemBase itemBase, bool checkRelations)
+        {
+            return mItemBaseDAL.IsLatest(itemBase, checkRelations);
+        }
 
-		public void GetLatest(ItemBase itemBase)
-		{
-			if(!mItemBaseDAL.IsLatest(itemBase, true))
-				Load(itemBase);
-		}
+        public void GetLatest(ItemBase itemBase)
+        {
+            if (!mItemBaseDAL.IsLatest(itemBase, true))
+                Load(itemBase);
+        }
 
-		public HoldingsInfo AddHolding(EventBase eventOwner, ItemBase itemOwner)
-		{
-			HoldingsInfo holdingsInfo = new HoldingsInfo(0, eventOwner, itemOwner);
-			mHoldingsInfoBO.Save(holdingsInfo);
-			
-			itemOwner.HoldingsInfo.Add(holdingsInfo);
+        public HoldingsInfo AddHolding(EventBase eventOwner, ItemBase itemOwner)
+        {
+            HoldingsInfo holdingsInfo = new HoldingsInfo(0, eventOwner, itemOwner);
+            mHoldingsInfoBO.Save(holdingsInfo);
 
-			return holdingsInfo;
-		}
+            itemOwner.HoldingsInfo.Add(holdingsInfo);
 
-		public HoldingsInfo DeleteHolding(EventBase eventOwner, ItemBase itemOwner, HoldingsInfo holdingsInfo)
-		{
-			mHoldingsInfoBO.Save(holdingsInfo);
-			
-			itemOwner.HoldingsInfo.Add(holdingsInfo);
+            return holdingsInfo;
+        }
 
-			return holdingsInfo;
-		}
+        public HoldingsInfo DeleteHolding(EventBase eventOwner, ItemBase itemOwner, HoldingsInfo holdingsInfo)
+        {
+            mHoldingsInfoBO.Save(holdingsInfo);
+
+            itemOwner.HoldingsInfo.Add(holdingsInfo);
+
+            return holdingsInfo;
+        }
 
         public int GetItemsCount(UInt64 eventUniqueID)
         {
             return mItemBaseDAL.GetChildrenUniqueIDsByEventParent(eventUniqueID).Count();
         }
-		
-		#endregion
 
-	}
+        #endregion
+
+    }
 }

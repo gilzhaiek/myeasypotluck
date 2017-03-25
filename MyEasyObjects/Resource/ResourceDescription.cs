@@ -10,298 +10,298 @@ using System.Data.SqlTypes;
 namespace MyEasyObjects.Resource
 {
 
-	/// <summary>
-	/// Name : Summary
-	/// Images
-	/// Links
-	/// Notes
-	/// </summary>
-	public class ResourceDescription : MyObjectBase, INotifyPropertyChanged
-	{
-		#region members
+    /// <summary>
+    /// Name : Summary
+    /// Images
+    /// Links
+    /// Notes
+    /// </summary>
+    public class ResourceDescription : MyObjectBase, INotifyPropertyChanged
+    {
+        #region members
 
-		string					mTopic = "";
+        string mTopic = "";
 
-		string					mSummary = "";
+        string mSummary = "";
 
-		List<ResourceNote>		mNotes = new List<ResourceNote>();
+        List<ResourceNote> mNotes = new List<ResourceNote>();
 
-		List<ResourceImage>		mImages = new List<ResourceImage>();
+        List<ResourceImage> mImages = new List<ResourceImage>();
 
-		string					mLink = "";
+        string mLink = "";
 
-		#endregion
+        #endregion
 
-		#region constructor
+        #region constructor
 
-		public ResourceDescription()
-		{
-		}
+        public ResourceDescription()
+        {
+        }
 
-		public ResourceDescription(UInt64 uniqueID)
-			: base(uniqueID)
-		{
-		}
+        public ResourceDescription(UInt64 uniqueID)
+            : base(uniqueID)
+        {
+        }
 
-		public ResourceDescription(UInt64 uniqueID, string topic, string summary)
-			: base(uniqueID)
-		{
-			mTopic		= topic;
-			mSummary	= summary;
-		}
+        public ResourceDescription(UInt64 uniqueID, string topic, string summary)
+            : base(uniqueID)
+        {
+            mTopic = topic;
+            mSummary = summary;
+        }
 
-		public ResourceDescription(UInt64 uniqueID, string topic, string summary, string link)
-			: base(uniqueID)
-		{
-			mTopic		= topic;
-			mSummary	= summary;
-			mLink		= link;
-		}
+        public ResourceDescription(UInt64 uniqueID, string topic, string summary, string link)
+            : base(uniqueID)
+        {
+            mTopic = topic;
+            mSummary = summary;
+            mLink = link;
+        }
 
-		#endregion
+        #endregion
 
-		#region properties
-		public UInt64 OwnerUniqueID
-		{
-			get {return UniqueID;}
-			set {UniqueID = value;}
-		}
+        #region properties
+        public UInt64 OwnerUniqueID
+        {
+            get { return UniqueID; }
+            set { UniqueID = value; }
+        }
 
-		public string Topic
-		{
-			get { return mTopic; }
-			set
-			{
-				if (mTopic != value)
-				{
-					mTopic = value;
-					OnPropertyChanged("ResourceDescription.Topic.Changed");
-				}
-			}
-		}
+        public string Topic
+        {
+            get { return mTopic; }
+            set
+            {
+                if (mTopic != value)
+                {
+                    mTopic = value;
+                    OnPropertyChanged("ResourceDescription.Topic.Changed");
+                }
+            }
+        }
 
-		public string Summary
-		{
-			get { return mSummary; }
-			set
-			{
-				if (mSummary != value)
-				{
-					mSummary = value;
-					OnPropertyChanged("ResourceDescription.Summary.Changed");
-				}
-			}
-		}
+        public string Summary
+        {
+            get { return mSummary; }
+            set
+            {
+                if (mSummary != value)
+                {
+                    mSummary = value;
+                    OnPropertyChanged("ResourceDescription.Summary.Changed");
+                }
+            }
+        }
 
-		public List<ResourceNote> Notes { get { return mNotes; } }
+        public List<ResourceNote> Notes { get { return mNotes; } }
 
-		public List<ResourceImage> Images { get { return mImages; } }
+        public List<ResourceImage> Images { get { return mImages; } }
 
-		public string Link
-		{
-			get { return mLink; }
-			set
-			{
-				if (mLink != value)
-				{
-					mLink = value;
-					OnPropertyChanged("ResourceDescription.Link.Changed");
-				}
-			}
-		}
+        public string Link
+        {
+            get { return mLink; }
+            set
+            {
+                if (mLink != value)
+                {
+                    mLink = value;
+                    OnPropertyChanged("ResourceDescription.Link.Changed");
+                }
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Functions
+        #region Functions
 
-		public void ClearNotes()
-		{
-			Notes.Clear();
-			OnPropertyChanged("ResourceDescription.Notes.Changed");
-		}
+        public void ClearNotes()
+        {
+            Notes.Clear();
+            OnPropertyChanged("ResourceDescription.Notes.Changed");
+        }
 
-		public void AddNote(ResourceNote resourceNote)
-		{
-			Notes.Add(resourceNote);
-			OnPropertyChanged("ResourceDescription.Notes.Changed");
-		}
+        public void AddNote(ResourceNote resourceNote)
+        {
+            Notes.Add(resourceNote);
+            OnPropertyChanged("ResourceDescription.Notes.Changed");
+        }
 
-		public void RemoveNote(ResourceNote resourceNote)
-		{
-			if (!Notes.Contains(resourceNote))
-				throw new System.ArgumentException("Notes do not contain the requested resourceNote", "resourceNote");
-			
-			Notes.Remove(resourceNote);
+        public void RemoveNote(ResourceNote resourceNote)
+        {
+            if (!Notes.Contains(resourceNote))
+                throw new System.ArgumentException("Notes do not contain the requested resourceNote", "resourceNote");
 
-			OnPropertyChanged("ResourceDescription.Notes.Changed");
+            Notes.Remove(resourceNote);
 
-			if (!Notes.Contains(resourceNote))
-				throw new System.ArgumentException("resourceNote could not be removed from Notes", "resourceNote");
-		}
-		
-		public void ClearImages()
-		{
-			Images.Clear();
-			OnPropertyChanged("ResourceDescription.Images.Changed");
-		}
+            OnPropertyChanged("ResourceDescription.Notes.Changed");
 
-		public void AddImage(ResourceImage resourceImage)
-		{
-			Images.Add(resourceImage);
-			OnPropertyChanged("ResourceDescription.Images.Changed");
-		}
+            if (!Notes.Contains(resourceNote))
+                throw new System.ArgumentException("resourceNote could not be removed from Notes", "resourceNote");
+        }
 
-		public void RemoveImage(ResourceImage resourceImage)
-		{
-			if (!Images.Contains(resourceImage))
-				throw new System.ArgumentException("Images do not contain the requested resourceImage", "resourceImage");
-			
-			Images.Remove(resourceImage);
+        public void ClearImages()
+        {
+            Images.Clear();
+            OnPropertyChanged("ResourceDescription.Images.Changed");
+        }
 
-			OnPropertyChanged("ResourceDescription.Images.Changed");
+        public void AddImage(ResourceImage resourceImage)
+        {
+            Images.Add(resourceImage);
+            OnPropertyChanged("ResourceDescription.Images.Changed");
+        }
 
-			if (!Images.Contains(resourceImage))
-				throw new System.ArgumentException("resourceImage could not be removed from Images", "resourceImage");
-		}
+        public void RemoveImage(ResourceImage resourceImage)
+        {
+            if (!Images.Contains(resourceImage))
+                throw new System.ArgumentException("Images do not contain the requested resourceImage", "resourceImage");
 
-		#endregion
+            Images.Remove(resourceImage);
 
-		#region String Conversion Members
+            OnPropertyChanged("ResourceDescription.Images.Changed");
 
-		public override string ToString()
-		{
-			if (IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
-			else
-			{
-				string retStr = UniqueID.ToString();
+            if (!Images.Contains(resourceImage))
+                throw new System.ArgumentException("resourceImage could not be removed from Images", "resourceImage");
+        }
 
-				retStr += mDelim + Topic;
+        #endregion
 
-				retStr += mDelim + Summary;
+        #region String Conversion Members
 
-				retStr += mDelim + Notes.Count.ToString();
-				for(int i = 0; i < Notes.Count; i++)
-					retStr += mDelim + Notes[i].UniqueID.ToString();
+        public override string ToString()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("ToString failed, this is null or not loaded", "this");
+            else
+            {
+                string retStr = UniqueID.ToString();
 
-				retStr += mDelim + Images.Count.ToString();
-				for(int i = 0; i < Images.Count; i++)
-					retStr += mDelim + Images[i].UniqueID.ToString();
+                retStr += mDelim + Topic;
 
-				retStr += mDelim + Link;
+                retStr += mDelim + Summary;
 
-				return retStr;
-			}
-		}
-		
-		public static ResourceDescription Parse(SqlString sqlStr)
-		{
-			if (sqlStr.IsNull)
-				return null;
-			else
-			{
-				return Parse(Convert.ToString(sqlStr));
-			}
-		}
+                retStr += mDelim + Notes.Count.ToString();
+                for (int i = 0; i < Notes.Count; i++)
+                    retStr += mDelim + Notes[i].UniqueID.ToString();
 
-		public static ResourceDescription Parse(string str)
-		{
-			int strCnt = 0;
-			ResourceDescription resourceDescription = new ResourceDescription();
+                retStr += mDelim + Images.Count.ToString();
+                for (int i = 0; i < Images.Count; i++)
+                    retStr += mDelim + Images[i].UniqueID.ToString();
 
-			string[] strSplit = null;
-			strSplit = str.Split(new char[] { ';' });
+                retStr += mDelim + Link;
 
-			strCnt = Parse(resourceDescription, strSplit, strCnt);
+                return retStr;
+            }
+        }
 
-			return resourceDescription;
-		}
-		
-		public static int Parse(ResourceDescription resourceDescription, string[] strSplit, int strCnt)
-		{
-			int count = 0;
+        public static ResourceDescription Parse(SqlString sqlStr)
+        {
+            if (sqlStr.IsNull)
+                return null;
+            else
+            {
+                return Parse(Convert.ToString(sqlStr));
+            }
+        }
 
-			resourceDescription.UniqueID	= Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+        public static ResourceDescription Parse(string str)
+        {
+            int strCnt = 0;
+            ResourceDescription resourceDescription = new ResourceDescription();
 
-			resourceDescription.Topic		= strSplit[strCnt]; strCnt++;
-			
-			resourceDescription.Summary		= strSplit[strCnt]; strCnt++;
+            string[] strSplit = null;
+            strSplit = str.Split(new char[] { ';' });
 
-			count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			for(int i = 0; i < count; i++)
-			{
-				if(strSplit[strCnt] == null)
-					break;
-				resourceDescription.Notes.Add(new ResourceNote(Convert.ToUInt64(strSplit[strCnt]))); strCnt++;
-			}
+            strCnt = Parse(resourceDescription, strSplit, strCnt);
 
-			count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
-			for(int i = 0; i < count; i++)
-			{
-				if(strSplit[strCnt] == null)
-					break;
-				resourceDescription.Images.Add(new ResourceImage(Convert.ToUInt64(strSplit[strCnt]))); strCnt++;
-			}
+            return resourceDescription;
+        }
 
-			resourceDescription.Link		= strSplit[strCnt]; strCnt++;
+        public static int Parse(ResourceDescription resourceDescription, string[] strSplit, int strCnt)
+        {
+            int count = 0;
 
-			return strCnt;
-		}
+            resourceDescription.UniqueID = Convert.ToUInt64(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
 
-		#endregion
+            resourceDescription.Topic = strSplit[strCnt]; strCnt++;
 
-		
-		#region IComparable Members
+            resourceDescription.Summary = strSplit[strCnt]; strCnt++;
 
-		//Override the Equals method        
-		public override bool Equals(object other)
-		{
-			return CompareTo(other) == 0;
-		}
+            count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            for (int i = 0; i < count; i++)
+            {
+                if (strSplit[strCnt] == null)
+                    break;
+                resourceDescription.Notes.Add(new ResourceNote(Convert.ToUInt64(strSplit[strCnt]))); strCnt++;
+            }
 
-		//Override the GetHashCode method
-		public override int GetHashCode()
-		{
-			if(IsNull)// || (!IsLoaded()))
-				return 0;
+            count = Convert.ToInt32(strSplit[strCnt] == null ? "0" : strSplit[strCnt]); strCnt++;
+            for (int i = 0; i < count; i++)
+            {
+                if (strSplit[strCnt] == null)
+                    break;
+                resourceDescription.Images.Add(new ResourceImage(Convert.ToUInt64(strSplit[strCnt]))); strCnt++;
+            }
 
-			return this.ToString().GetHashCode();
-		}
+            resourceDescription.Link = strSplit[strCnt]; strCnt++;
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Other object is null
-		//		The argument to compare is not a UserBase
-		//		Refering object (this) is null
-		public override int CompareTo(object other)
-		{
-			if (other == null)
-				throw new System.ArgumentException("Other object is null", "other");
+            return strCnt;
+        }
 
-			ResourceDescription resourceDescription = other as ResourceDescription;
+        #endregion
 
-			if (resourceDescription == null)
-				throw new System.ArgumentException("The argument to compare is not a resourceDescription", "other");
 
-			if(IsNull)// || (!IsLoaded()))
-				throw new System.ArgumentException("Refering object (this) is null", "this");
+        #region IComparable Members
 
-			return this.ToString().CompareTo(resourceDescription.ToString());
-		}
+        //Override the Equals method        
+        public override bool Equals(object other)
+        {
+            return CompareTo(other) == 0;
+        }
 
-		#endregion
+        //Override the GetHashCode method
+        public override int GetHashCode()
+        {
+            if (IsNull)// || (!IsLoaded()))
+                return 0;
 
-		#region INotifyPropertyChanged Members
+            return this.ToString().GetHashCode();
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Other object is null
+        //		The argument to compare is not a UserBase
+        //		Refering object (this) is null
+        public override int CompareTo(object other)
+        {
+            if (other == null)
+                throw new System.ArgumentException("Other object is null", "other");
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			PropertyChangedEventHandler handler = this.PropertyChanged;
-			if (handler != null)
-				handler(this, new PropertyChangedEventArgs(propertyName));
-		}
+            ResourceDescription resourceDescription = other as ResourceDescription;
 
-		#endregion
-	}
+            if (resourceDescription == null)
+                throw new System.ArgumentException("The argument to compare is not a resourceDescription", "other");
+
+            if (IsNull)// || (!IsLoaded()))
+                throw new System.ArgumentException("Refering object (this) is null", "this");
+
+            return this.ToString().CompareTo(resourceDescription.ToString());
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

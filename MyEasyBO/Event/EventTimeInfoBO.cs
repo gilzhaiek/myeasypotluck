@@ -9,29 +9,29 @@ using MyEasyDAL.Event;
 
 namespace MyEasyBO.ResourceBO
 {
-	public class EventTimeInfoBO
-	{
-		#region Members
+    public class EventTimeInfoBO
+    {
+        #region Members
 
-		EventTimeInfoDAL mEventTimeInfoDAL = new EventTimeInfoDAL();
+        EventTimeInfoDAL mEventTimeInfoDAL = new EventTimeInfoDAL();
 
-		#endregion
+        #endregion
 
-		public void ClearValues(EventTimeInfo eventTimeInfo)
-		{
-			eventTimeInfo.UniqueID		= 0;
+        public void ClearValues(EventTimeInfo eventTimeInfo)
+        {
+            eventTimeInfo.UniqueID = 0;
 
-			eventTimeInfo.CreationTime	= null;
-			
-			eventTimeInfo.BecomeActive	= null;
+            eventTimeInfo.CreationTime = null;
 
-			eventTimeInfo.BecomeInactive	= null;
-		}
+            eventTimeInfo.BecomeActive = null;
 
-		public void Save(EventTimeInfo eventTimeInfo)
-		{
-			mEventTimeInfoDAL.Save(eventTimeInfo);
-		}
+            eventTimeInfo.BecomeInactive = null;
+        }
+
+        public void Save(EventTimeInfo eventTimeInfo)
+        {
+            mEventTimeInfoDAL.Save(eventTimeInfo);
+        }
 
 
         public void Delete(EventTimeInfo eventTimeInfo)
@@ -42,40 +42,40 @@ namespace MyEasyBO.ResourceBO
             mEventTimeInfoDAL.Delete(eventTimeInfo);
         }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		eventTimeInfo is null when loading EventTimeInfo
-		//		Load Failed
-		public void Load(EventTimeInfo eventTimeInfo)
-		{
-			try
-			{
-				if(eventTimeInfo.IsNull)
-				{
-					throw new System.ArgumentException("eventTimeInfo is null when loading EventTimeInfo", "eventTimeInfo");
-				}
+        // Exceptions:
+        //	System.ArgumentException:
+        //		eventTimeInfo is null when loading EventTimeInfo
+        //		Load Failed
+        public void Load(EventTimeInfo eventTimeInfo)
+        {
+            try
+            {
+                if (eventTimeInfo.IsNull)
+                {
+                    throw new System.ArgumentException("eventTimeInfo is null when loading EventTimeInfo", "eventTimeInfo");
+                }
 
                 LoadInternal(eventTimeInfo);
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "eventTimeInfo");
-			}
-		}
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "eventTimeInfo");
+            }
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Load Failed
-		protected void LoadInternal(EventTimeInfo eventTimeInfo)
-		{
-			try
-			{
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Load Failed
+        protected void LoadInternal(EventTimeInfo eventTimeInfo)
+        {
+            try
+            {
                 mEventTimeInfoDAL.Load(eventTimeInfo, eventTimeInfo.UniqueID);
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "eventTimeInfo");
-			}
-		}
-	}
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "eventTimeInfo");
+            }
+        }
+    }
 }

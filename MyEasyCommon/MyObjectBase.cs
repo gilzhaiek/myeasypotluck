@@ -6,64 +6,64 @@ using System.Data.SqlTypes;
 
 namespace MyEasy.Common
 {
-	public abstract class MyObjectBase : INullable, IComparable
-	{
-		#region Members
+    public abstract class MyObjectBase : INullable, IComparable
+    {
+        #region Members
 
-		protected UInt64	mUniqueID		= 0;
+        protected UInt64 mUniqueID = 0;
 
-		protected Int64		mLastDALChange	= 0;
+        protected Int64 mLastDALChange = 0;
 
-		protected bool		mIsLoaded = false;
+        protected bool mIsLoaded = false;
 
-		protected string	mDelim = new string((new char[] { ';' }));
+        protected string mDelim = new string((new char[] { ';' }));
 
-		#endregion 
-		
-		#region Constructor
+        #endregion
 
-		public MyObjectBase()
-		{
-		}
+        #region Constructor
 
-		public MyObjectBase(UInt64 uniqueID)
-		{
-			mUniqueID = uniqueID;
-		}
+        public MyObjectBase()
+        {
+        }
 
-		#endregion
+        public MyObjectBase(UInt64 uniqueID)
+        {
+            mUniqueID = uniqueID;
+        }
 
-		#region Properties
+        #endregion
 
-		public virtual UInt64 UniqueID
-		{
-			get {return mUniqueID;}
-			set
-			{
-				LastDALChange	= 0;
-				mUniqueID		= value;
-			}
-		}
+        #region Properties
+
+        public virtual UInt64 UniqueID
+        {
+            get { return mUniqueID; }
+            set
+            {
+                LastDALChange = 0;
+                mUniqueID = value;
+            }
+        }
 
         public virtual Int64 LastDALChange
-		{
-			get {return mLastDALChange;}
-			set {mLastDALChange = value;}
-		}
+        {
+            get { return mLastDALChange; }
+            set { mLastDALChange = value; }
+        }
 
-		public virtual bool IsNull
-		{
-			get { return (UniqueID == 0); }
-			protected set {}
-		}
+        public virtual bool IsNull
+        {
+            get { return (UniqueID == 0); }
+            protected set { }
+        }
 
-		public virtual bool IsLoaded()
-		{
-			return (LastDALChange != 0);
-		}
+        public virtual bool IsLoaded()
+        {
+            return (LastDALChange != 0);
+        }
 
-		public abstract int CompareTo(object objectToCompare);
+        public abstract int CompareTo(object objectToCompare);
 
-		#endregion
-	}
+        #endregion
+    }
 }

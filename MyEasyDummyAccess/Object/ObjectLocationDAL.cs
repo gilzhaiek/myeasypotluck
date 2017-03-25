@@ -11,57 +11,57 @@ using System.Data;
 
 namespace MyEasyDAL.Object
 {
-	public class ObjectLocationDAL :  MyObjectBaseDAL, ObjectLocationIDAL
-	{
-		#region Members
-		#endregion
+    public class ObjectLocationDAL : MyObjectBaseDAL, ObjectLocationIDAL
+    {
+        #region Members
+        #endregion
 
-		public ObjectLocationDAL()
-		{
-		}
+        public ObjectLocationDAL()
+        {
+        }
 
-		public bool IsLatest(ObjectLocation objectLocation)
-		{
-			ObjectLocation upToDateObjectLocation = new ObjectLocation();
+        public bool IsLatest(ObjectLocation objectLocation)
+        {
+            ObjectLocation upToDateObjectLocation = new ObjectLocation();
 
-			Load(upToDateObjectLocation, objectLocation.UniqueID);
+            Load(upToDateObjectLocation, objectLocation.UniqueID);
 
-			return (upToDateObjectLocation.LastDALChange == objectLocation.LastDALChange);
-		}
+            return (upToDateObjectLocation.LastDALChange == objectLocation.LastDALChange);
+        }
 
 
-		public bool ObjectLocationExists(UInt64 uniqueID)
-		{
+        public bool ObjectLocationExists(UInt64 uniqueID)
+        {
             return ObjectBaseExists(uniqueID, "ObjectLocation", "UniqueID");
-		}
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		objectLocation is null when saving ObjectLocation
-		public void	Save(ObjectLocation objectLocation)
-		{
-			if(objectLocation.IsNull)
-			{
-				SaveInternal(objectLocation);
-			}
-			else
-			{
-				ObjectLocation upToDateObjectLocation = new ObjectLocation();
+        // Exceptions:
+        //	System.ArgumentException:
+        //		objectLocation is null when saving ObjectLocation
+        public void Save(ObjectLocation objectLocation)
+        {
+            if (objectLocation.IsNull)
+            {
+                SaveInternal(objectLocation);
+            }
+            else
+            {
+                ObjectLocation upToDateObjectLocation = new ObjectLocation();
 
-				try
-				{
-					Load(upToDateObjectLocation, objectLocation.UniqueID);
-				}
-				catch
-				{
-					SaveInternal(objectLocation);
-					return;
-				}
+                try
+                {
+                    Load(upToDateObjectLocation, objectLocation.UniqueID);
+                }
+                catch
+                {
+                    SaveInternal(objectLocation);
+                    return;
+                }
 
-				if(objectLocation.CompareTo(upToDateObjectLocation) != 0)
-					UpdateInternal(objectLocation);
-			}
-		}
+                if (objectLocation.CompareTo(upToDateObjectLocation) != 0)
+                    UpdateInternal(objectLocation);
+            }
+        }
 
         public void Delete(ObjectLocation objectLocation)
         {
@@ -79,55 +79,55 @@ namespace MyEasyDAL.Object
         }
 
 
-		public void Load(ObjectLocation objectLocation, UInt64 uniqueID)
-		{
-			SqlDataReader	sqlReader = null;
-			SqlCommand		sqlCommand = null;
+        public void Load(ObjectLocation objectLocation, UInt64 uniqueID)
+        {
+            SqlDataReader sqlReader = null;
+            SqlCommand sqlCommand = null;
 
-			try
-			{
-				sqlCommand = new SqlCommand("select * from ObjectLocation where UniqueID = @1", mSqlConnection);
-				SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
-				sqlParameter.Value = uniqueID;
-				sqlCommand.Parameters.Add(sqlParameter);
+            try
+            {
+                sqlCommand = new SqlCommand("select * from ObjectLocation where UniqueID = @1", mSqlConnection);
+                SqlParameter sqlParameter = new SqlParameter("@1", SqlDbType.BigInt);
+                sqlParameter.Value = uniqueID;
+                sqlCommand.Parameters.Add(sqlParameter);
 
-				sqlReader = sqlCommand.ExecuteReader();
-				if(!sqlReader.Read())
-				{
-					throw new System.ArgumentException("objectLocation with uniqueID=" + uniqueID.ToString() + " was not found", "uniqueID");
-				}
-				
-				objectLocation.UniqueID			= uniqueID;
-				objectLocation.LastDALChange	= Convert.ToInt64(sqlReader["LastDALChange"].ToString());
+                sqlReader = sqlCommand.ExecuteReader();
+                if (!sqlReader.Read())
+                {
+                    throw new System.ArgumentException("objectLocation with uniqueID=" + uniqueID.ToString() + " was not found", "uniqueID");
+                }
 
-				objectLocation.Address1	= sqlReader["Address1"].ToString();
-				objectLocation.Address2	= sqlReader["Address2"].ToString();
-				objectLocation.Address3	= sqlReader["Address3"].ToString();
-				objectLocation.City		= sqlReader["City"].ToString();
-				objectLocation.State	= sqlReader["State"].ToString();
-				objectLocation.Zip		= sqlReader["Zip"].ToString();
-				objectLocation.Country	= (ECountry)Enum.Parse(typeof(ECountry), sqlReader["ECountry"].ToString());
-				objectLocation.Latitude	= Convert.ToDecimal(sqlReader["Latitude"].ToString());
-				objectLocation.Longitude= Convert.ToDecimal(sqlReader["Longitude"].ToString());
+                objectLocation.UniqueID = uniqueID;
+                objectLocation.LastDALChange = Convert.ToInt64(sqlReader["LastDALChange"].ToString());
 
-				if(sqlReader.Read())
-				{
-					throw new ArgumentException("Multiple UniqueID=" + uniqueID.ToString() + " were found in ObjectLocation", "uniqueID");
-				}
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-			finally
-			{
-				sqlReader.Close();
+                objectLocation.Address1 = sqlReader["Address1"].ToString();
+                objectLocation.Address2 = sqlReader["Address2"].ToString();
+                objectLocation.Address3 = sqlReader["Address3"].ToString();
+                objectLocation.City = sqlReader["City"].ToString();
+                objectLocation.State = sqlReader["State"].ToString();
+                objectLocation.Zip = sqlReader["Zip"].ToString();
+                objectLocation.Country = (ECountry)Enum.Parse(typeof(ECountry), sqlReader["ECountry"].ToString());
+                objectLocation.Latitude = Convert.ToDecimal(sqlReader["Latitude"].ToString());
+                objectLocation.Longitude = Convert.ToDecimal(sqlReader["Longitude"].ToString());
+
+                if (sqlReader.Read())
+                {
+                    throw new ArgumentException("Multiple UniqueID=" + uniqueID.ToString() + " were found in ObjectLocation", "uniqueID");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            finally
+            {
+                sqlReader.Close();
                 mSqlConnection.Close();
-			}
-		}
+            }
+        }
 
-		protected void UpdateInternal(ObjectLocation objectLocation)
-		{
+        protected void UpdateInternal(ObjectLocation objectLocation)
+        {
             try
             {
                 objectLocation.LastDALChange = DateTime.Now.Ticks;
@@ -184,10 +184,10 @@ namespace MyEasyDAL.Object
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
-		protected void SaveInternal(ObjectLocation objectLocation)
-		{
+        protected void SaveInternal(ObjectLocation objectLocation)
+        {
             try
             {
                 objectLocation.LastDALChange = DateTime.Now.Ticks;
@@ -233,7 +233,7 @@ namespace MyEasyDAL.Object
             {
                 mSqlConnection.Close();
             }
-		}
+        }
 
         protected void DeleteInternal(ObjectLocation objectLocation)
         {
@@ -262,5 +262,5 @@ namespace MyEasyDAL.Object
                 mSqlConnection.Close();
             }
         }
-	}
+    }
 }

@@ -7,12 +7,12 @@ using MyEasyObjects.Event;
 
 namespace MyEasyIDAL.Event
 {
-	public interface EventTimeInfoIDAL
-	{
-		void Load(EventTimeInfo eventTimeInfo, UInt64 uniqueID);
+    public interface EventTimeInfoIDAL
+    {
+        void Load(EventTimeInfo eventTimeInfo, UInt64 uniqueID);
 
-		bool IsLatest(EventTimeInfo eventTimeInfo);
+        bool IsLatest(EventTimeInfo eventTimeInfo);
 
-		void Save(EventTimeInfo eventTimeInfo);
-	}
+        void Save(EventTimeInfo eventTimeInfo);
+    }
 }

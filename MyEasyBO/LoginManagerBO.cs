@@ -18,39 +18,39 @@ using MyEasyBO.HoldingBO;
 
 namespace MyEasyBO
 {
-	public class LoginManagerBO
-	{
-		#region Members
+    public class LoginManagerBO
+    {
+        #region Members
 
-		LoginManagerDAL		mAccessLayer	= new LoginManagerDAL();
-		UserBaseBO			mUserBaseBO		= new UserBaseBO();
+        LoginManagerDAL mAccessLayer = new LoginManagerDAL();
+        UserBaseBO mUserBaseBO = new UserBaseBO();
         /*EventBaseBO         mEventBaseBO    = new EventBaseBO();
         ItemBaseBO          mItemBaseBO     = new ItemBaseBO();
         HoldingsInfoBO      mHoldingsInfoBO = new HoldingsInfoBO();*/
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
 
-		public LoginManagerBO() {}
+        public LoginManagerBO() { }
 
-		#endregion
+        #endregion
 
-		#region Functions
+        #region Functions
 
-		public bool GetUser(UserBase retUserBase, string email, string password)
-		{
-			UInt64 userUniqueID = mAccessLayer.GetUserUniqueID(email, password);
-			
-			if(userUniqueID == 0) return false;
+        public bool GetUser(UserBase retUserBase, string email, string password)
+        {
+            UInt64 userUniqueID = mAccessLayer.GetUserUniqueID(email, password);
+
+            if (userUniqueID == 0) return false;
 
             retUserBase.UniqueID = userUniqueID;
 
-			mUserBaseBO.Load(retUserBase);
-			
-			return true;
-		}
+            mUserBaseBO.Load(retUserBase);
+
+            return true;
+        }
 
         public bool CreateFBUser(UserBase retUserBase, string firstName, string lastName)
         {
@@ -155,45 +155,45 @@ namespace MyEasyBO
 		    mUserBaseBO.Save(userBase);
         }*/
 
-		public void CreateUser(UserBase userBase,
-			string password, string email, 
-			string firstName, string lastName, EGender gender, ECountry country)
-		{
-			if(EmailExists(email))
-			{
-				throw new System.ArgumentException("Email Exists already", "email");
-			}
+        public void CreateUser(UserBase userBase,
+            string password, string email,
+            string firstName, string lastName, EGender gender, ECountry country)
+        {
+            if (EmailExists(email))
+            {
+                throw new System.ArgumentException("Email Exists already", "email");
+            }
 
-			UserLoginInfo userLoginInfo = new UserLoginInfo(password, email, 0);
+            UserLoginInfo userLoginInfo = new UserLoginInfo(password, email, 0);
 
-			AddUser(userLoginInfo);
+            AddUser(userLoginInfo);
 
-			userBase.UniqueID			= userLoginInfo.UniqueID;
-			userBase.FirstName			= firstName;
-			userBase.LastName			= lastName;
-			userBase.Email				= email;
-			userBase.Gender				= gender;
-			userBase.Location.Country	= country;
-			//userInfo.Phone;
-			//userInfo.Title;
+            userBase.UniqueID = userLoginInfo.UniqueID;
+            userBase.FirstName = firstName;
+            userBase.LastName = lastName;
+            userBase.Email = email;
+            userBase.Gender = gender;
+            userBase.Location.Country = country;
+            //userInfo.Phone;
+            //userInfo.Title;
 
-			mUserBaseBO.Save(userBase);
-		}
+            mUserBaseBO.Save(userBase);
+        }
 
-		protected void AddUser(UserLoginInfo userLoginInfo)
-		{
-			mAccessLayer.AddUser(userLoginInfo);
-		}
+        protected void AddUser(UserLoginInfo userLoginInfo)
+        {
+            mAccessLayer.AddUser(userLoginInfo);
+        }
 
-		public bool LoginNameExists(string loginName)
-		{
-			return mAccessLayer.LoginNameExists(loginName);
-		}
+        public bool LoginNameExists(string loginName)
+        {
+            return mAccessLayer.LoginNameExists(loginName);
+        }
 
-		public bool EmailExists(string email)
-		{
-			return mAccessLayer.EmailExists(email);
-		}
+        public bool EmailExists(string email)
+        {
+            return mAccessLayer.EmailExists(email);
+        }
 
 
         public void UpdateUserLoginInfo(UInt64 uniqueID, string email)
@@ -219,6 +219,6 @@ namespace MyEasyBO
             return mUserBaseBO.UserExists(uniqueID);
         }
 
-		#endregion
-	}
+        #endregion
+    }
 }

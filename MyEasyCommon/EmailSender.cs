@@ -6,18 +6,18 @@ using System.Net.Mail;
 
 namespace MyEasy.Common
 {
-	static public class EmailSender
-	{
-		public enum EEmailAccount
-		{
-			eEmailSupport,
-			eEmailInvitation,
+    static public class EmailSender
+    {
+        public enum EEmailAccount
+        {
+            eEmailSupport,
+            eEmailInvitation,
             eEmailReminder
-		};
+        };
 
-		static public void SendEmail(EEmailAccount emailAccount, string email, string subject, string body)
-		{
-			MailAddress from, to;
+        static public void SendEmail(EEmailAccount emailAccount, string email, string subject, string body)
+        {
+            MailAddress from, to;
             if (EEmailAccount.eEmailInvitation == emailAccount)
             {
                 from = new MailAddress("invite@myeasypotluck.com", "MyEasyPotluck");
@@ -39,25 +39,25 @@ namespace MyEasy.Common
                 return;
             }
 
-			MailMessage mailMessage = new MailMessage(from, to);
+            MailMessage mailMessage = new MailMessage(from, to);
 
-			mailMessage.IsBodyHtml = true;
-			mailMessage.Subject = subject;
-			mailMessage.Body = body;
+            mailMessage.IsBodyHtml = true;
+            mailMessage.Subject = subject;
+            mailMessage.Body = body;
 
-			SmtpClient client = new SmtpClient("relay-hosting.secureserver.net");
+            SmtpClient client = new SmtpClient("relay-hosting.secureserver.net");
             //SmtpClient client = new SmtpClient("smtp.secureserver.net");
-		
-			if(EEmailAccount.eEmailInvitation == emailAccount)
-				client.Credentials = new System.Net.NetworkCredential("invite@myeasypotluck.com", "invite245go");
-			else if(EEmailAccount.eEmailInvitation == emailAccount)
-				client.Credentials = new System.Net.NetworkCredential("support@myeasypotluck.com", "support19go");
+
+            if (EEmailAccount.eEmailInvitation == emailAccount)
+                client.Credentials = new System.Net.NetworkCredential("invite@myeasypotluck.com", "invite245go");
+            else if (EEmailAccount.eEmailInvitation == emailAccount)
+                client.Credentials = new System.Net.NetworkCredential("support@myeasypotluck.com", "support19go");
             else
                 client.Credentials = new System.Net.NetworkCredential("reminder@myeasypotluck.com", "reminder452go");
-			
-			client.Port = 25;
-			client.EnableSsl = false;
-			client.Send(mailMessage);			
-		}
-	}
+
+            client.Port = 25;
+            client.EnableSsl = false;
+            client.Send(mailMessage);
+        }
+    }
 }

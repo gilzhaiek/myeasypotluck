@@ -5,10 +5,10 @@ using System.Text;
 
 namespace MyEasyBO
 {
-	public class ProjectAdminBO 
-	{
-		public ProjectAdminBO()
-		{
-		}
-	}
+    public class ProjectAdminBO
+    {
+        public ProjectAdminBO()
+        {
+        }
+    }
 }

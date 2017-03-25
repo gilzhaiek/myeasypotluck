@@ -18,51 +18,51 @@ using MyEasyObjects.Holding;
 
 namespace MyEasyBO.Event
 {
-	public class EventBaseBO : ResourceBaseBO
-	{
-		#region Members
+    public class EventBaseBO : ResourceBaseBO
+    {
+        #region Members
 
-		EventBaseDAL			mEventBaseDAL			= new EventBaseDAL();
-		ItemBaseDAL				mItemBaseDAL			= new ItemBaseDAL();
-		ItemBaseBO				mItemBaseBO				= new ItemBaseBO();
-		EventTimeInfoBO			mEventTimeInfoBO		= new EventTimeInfoBO();
-		ObjectLocationBO		mEventLocationBO		= new ObjectLocationBO();
-		ResourceDescriptionBO	mResourceDescriptionBO	= new ResourceDescriptionBO();
-		HoldingsInfoBO			mHoldingsInfoBO			= new HoldingsInfoBO();
-        EventsInvitationsBO     mEventsInvitationsBO = new EventsInvitationsBO();
-		
-		#endregion
+        EventBaseDAL mEventBaseDAL = new EventBaseDAL();
+        ItemBaseDAL mItemBaseDAL = new ItemBaseDAL();
+        ItemBaseBO mItemBaseBO = new ItemBaseBO();
+        EventTimeInfoBO mEventTimeInfoBO = new EventTimeInfoBO();
+        ObjectLocationBO mEventLocationBO = new ObjectLocationBO();
+        ResourceDescriptionBO mResourceDescriptionBO = new ResourceDescriptionBO();
+        HoldingsInfoBO mHoldingsInfoBO = new HoldingsInfoBO();
+        EventsInvitationsBO mEventsInvitationsBO = new EventsInvitationsBO();
 
-		#region Functions
+        #endregion
 
-		public void ClearValues(EventBase eventBase)
-		{
-			// ResourceBase
-			base.ClearValues((ResourceBase)eventBase);
+        #region Functions
 
-			// EventBase
-			eventBase.EventParent			= new EventBase();
-			eventBase.EventChildren.Clear();
-			eventBase.ItemChildren.Clear();
-			eventBase.EventTimeInfo			= new EventTimeInfo();
-			eventBase.EventLocation			= new ObjectLocation();
-			eventBase.IsPublic				= false;
-		}
+        public void ClearValues(EventBase eventBase)
+        {
+            // ResourceBase
+            base.ClearValues((ResourceBase)eventBase);
 
-		public void Delete(EventBase eventBase)
-		{
+            // EventBase
+            eventBase.EventParent = new EventBase();
+            eventBase.EventChildren.Clear();
+            eventBase.ItemChildren.Clear();
+            eventBase.EventTimeInfo = new EventTimeInfo();
+            eventBase.EventLocation = new ObjectLocation();
+            eventBase.IsPublic = false;
+        }
+
+        public void Delete(EventBase eventBase)
+        {
             mEventsInvitationsBO.Delete(eventBase.UniqueID);
 
-			mEventLocationBO.Delete(eventBase.EventLocation);
+            mEventLocationBO.Delete(eventBase.EventLocation);
 
-			mResourceDescriptionBO.Delete(eventBase.ResourceDescription);
+            mResourceDescriptionBO.Delete(eventBase.ResourceDescription);
 
-			mEventTimeInfoBO.Delete(eventBase.EventTimeInfo);
+            mEventTimeInfoBO.Delete(eventBase.EventTimeInfo);
 
-			foreach(HoldingsInfo holdingsInfo in eventBase.HoldingsInfo)
-			{
-				mHoldingsInfoBO.Delete(holdingsInfo);
-			}
+            foreach (HoldingsInfo holdingsInfo in eventBase.HoldingsInfo)
+            {
+                mHoldingsInfoBO.Delete(holdingsInfo);
+            }
 
             foreach (ItemBase itemBase in eventBase.ItemChildren)
             {
@@ -74,76 +74,76 @@ namespace MyEasyBO.Event
                 Delete(eventChildran);
             }
 
-			mEventBaseDAL.Delete(eventBase);
-		}
+            mEventBaseDAL.Delete(eventBase);
+        }
 
-		public void Save(EventBase eventBase)
-		{	
-			mEventLocationBO.Save(eventBase.EventLocation);
-			
-			mEventBaseDAL.Save(eventBase);
+        public void Save(EventBase eventBase)
+        {
+            mEventLocationBO.Save(eventBase.EventLocation);
 
-			mResourceDescriptionBO.Save(eventBase.ResourceDescription);
+            mEventBaseDAL.Save(eventBase);
 
-			mEventTimeInfoBO.Save(eventBase.EventTimeInfo);
+            mResourceDescriptionBO.Save(eventBase.ResourceDescription);
 
-			foreach(HoldingsInfo holdingsInfo in eventBase.HoldingsInfo)
-			{
-				mHoldingsInfoBO.Save(holdingsInfo);
-			}
-		}
+            mEventTimeInfoBO.Save(eventBase.EventTimeInfo);
 
-		public List<UInt64> GetEventsUniqueIDByAdminUniqueID(UInt64 adminUniqueID)
-		{
-			return mEventBaseDAL.GetEventsUniqueIDByAdminUniqueID(adminUniqueID);
-		}
+            foreach (HoldingsInfo holdingsInfo in eventBase.HoldingsInfo)
+            {
+                mHoldingsInfoBO.Save(holdingsInfo);
+            }
+        }
 
-		public List<UInt64> GetEventsUniqueIDByHolderUniqueID(UInt64 holdingUserUniqueID)
-		{
-			return mHoldingsInfoBO.GetEventsUniqueIDByHolderUniqueID(holdingUserUniqueID);
-		}
+        public List<UInt64> GetEventsUniqueIDByAdminUniqueID(UInt64 adminUniqueID)
+        {
+            return mEventBaseDAL.GetEventsUniqueIDByAdminUniqueID(adminUniqueID);
+        }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		eventBase is null when loading EventBase
-		//		Load Failed
-		public void Load(EventBase eventBase, UserBase currentUser, bool loadChildren = true)
-		{
-			try
-			{
-				if(eventBase.IsNull)
-				{
-					throw new System.ArgumentException("eventBase is null when loading EventBase", "eventBase");
-				}
+        public List<UInt64> GetEventsUniqueIDByHolderUniqueID(UInt64 holdingUserUniqueID)
+        {
+            return mHoldingsInfoBO.GetEventsUniqueIDByHolderUniqueID(holdingUserUniqueID);
+        }
+
+        // Exceptions:
+        //	System.ArgumentException:
+        //		eventBase is null when loading EventBase
+        //		Load Failed
+        public void Load(EventBase eventBase, UserBase currentUser, bool loadChildren = true)
+        {
+            try
+            {
+                if (eventBase.IsNull)
+                {
+                    throw new System.ArgumentException("eventBase is null when loading EventBase", "eventBase");
+                }
 
                 LoadInternal(eventBase, currentUser, loadChildren);
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "eventBase");
-			}
-		}
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "eventBase");
+            }
+        }
 
         public bool EventExists(UInt64 uniqueID)
         {
             return mEventBaseDAL.EventBaseExists(uniqueID);
         }
 
-		// Exceptions:
-		//	System.ArgumentException:
-		//		Load Failed
-		// currentUser is to check validation
+        // Exceptions:
+        //	System.ArgumentException:
+        //		Load Failed
+        // currentUser is to check validation
         protected void LoadInternal(EventBase eventBase, UserBase currentUser, bool loadChildren)
-		{
-			try
-			{
+        {
+            try
+            {
                 mEventBaseDAL.Load(eventBase, eventBase.UniqueID);
-				
-				mEventTimeInfoBO.Load(eventBase.EventTimeInfo);
 
-				mEventLocationBO.Load(eventBase.EventLocation);
+                mEventTimeInfoBO.Load(eventBase.EventTimeInfo);
 
-				mResourceDescriptionBO.Load(eventBase.ResourceDescription);
+                mEventLocationBO.Load(eventBase.EventLocation);
+
+                mResourceDescriptionBO.Load(eventBase.ResourceDescription);
 
                 if (loadChildren)
                 {
@@ -171,25 +171,25 @@ namespace MyEasyBO.Event
                         eventBase.HoldingsInfo.Add(holdingsInfo);
                     }
                 }
-			}
-			catch
-			{
-				throw new System.ArgumentException("Load Failed", "eventBase");
-			}
-		}
+            }
+            catch
+            {
+                throw new System.ArgumentException("Load Failed", "eventBase");
+            }
+        }
 
-		public bool IsLatest(EventBase eventBase, bool checkRelations)
-		{
-			return mEventBaseDAL.IsLatest(eventBase, checkRelations);
-		}
+        public bool IsLatest(EventBase eventBase, bool checkRelations)
+        {
+            return mEventBaseDAL.IsLatest(eventBase, checkRelations);
+        }
 
-		public void GetLatest(EventBase eventBase, UserBase currentUser)
-		{
-			if(!mEventBaseDAL.IsLatest(eventBase, true))
-				Load(eventBase, currentUser);
-		}
+        public void GetLatest(EventBase eventBase, UserBase currentUser)
+        {
+            if (!mEventBaseDAL.IsLatest(eventBase, true))
+                Load(eventBase, currentUser);
+        }
 
-		#endregion
+        #endregion
 
-	}
+    }
 }

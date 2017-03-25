@@ -6,16 +6,16 @@ using MyEasyObjects.Item;
 
 namespace MyEasyIDAL.Item
 {
-	public interface ItemBaseIDAL
-	{
-		void Load(ItemBase itemBase, UInt64 uniqueID);
+    public interface ItemBaseIDAL
+    {
+        void Load(ItemBase itemBase, UInt64 uniqueID);
 
-		bool IsLatest(ItemBase itemBase, bool checkRelations);
+        bool IsLatest(ItemBase itemBase, bool checkRelations);
 
-		void Save(ItemBase itemBase);
+        void Save(ItemBase itemBase);
 
-		List<UInt64> GetChildrenUniqueIDsByEventParent(UInt64 eventParentUniqueID);
+        List<UInt64> GetChildrenUniqueIDsByEventParent(UInt64 eventParentUniqueID);
 
-		List<UInt64> GetChildrenUniqueIDsByItemParent(UInt64 itemParentUniqueID);
-	}
+        List<UInt64> GetChildrenUniqueIDsByItemParent(UInt64 itemParentUniqueID);
+    }
 }
